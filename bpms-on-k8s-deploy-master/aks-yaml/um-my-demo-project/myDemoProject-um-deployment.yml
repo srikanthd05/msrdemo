@@ -1,0 +1,110 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: um-demo-my-project
+  namespace: bpms-load-test
+  labels:
+    app: um-demo-my-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: um-demo-my-project
+  template:
+    metadata:
+      labels:
+        app: um-demo-my-project
+    spec:
+      #nodeName: aks-agentpool-14287980-vmss00004d
+      containers:
+      - name: um-demo-my-project
+        #image: registry-144fd7c1.nip.io/v2/wm1015um-mydemo-myproject:v2
+        image: sagcr.azurecr.io/universalmessaging-server:10.15
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+          protocol: TCP
+        env:
+        - name: INIT_JAVA_MEM_SIZE
+          value: "4096" 
+        - name: MAX_JAVA_MEM_SIZE
+          value: "4096"  
+        #- name: STARTUP_COMMAND 
+        # value: "/opt/softwareag/assets/UmScriptWrapper.sh"   
+        #- name: UM_SERVICE_NAME
+        #  value: "um-demo-my-project-clusterip-svc"       
+        #- name: UM_SERVICE_PORT
+        #  value: "9000"  
+        readinessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 20
+        livenessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          periodSeconds: 60
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: licence
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/licence/licence.xml
+          subPath: universalmessaging-licence.xml
+        - name: data
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/data
+          readOnly: false
+        - name: logs
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/logs
+          readOnly: false
+        - name: jms-channel-list-txt
+          mountPath: /opt/softwareag/assets/jmsChannelList.txt
+          subPath: jmsChannelList.txt
+        - name: jms-topic-list-txt
+          mountPath: /opt/softwareag/assets/jmsTopicList.txt
+          subPath: jmsTopicList.txt
+        - name: wm-native-channel-list-txt
+          mountPath: /opt/softwareag/assets/wmNativeChannelList.txt
+          subPath: wmNativeChannelList.txt
+      securityContext:
+        fsGroup: 1724  
+      volumes:
+      - name: licence
+        configMap:
+          name: um-demo-my-project-license-configmap
+          items:
+            - key: universalmessaging-licence.xml
+              path: universalmessaging-licence.xml
+      - name: jms-channel-list-txt
+        configMap:
+          name: um-demo-my-project-assets-configmap
+          items:
+            - key: jmsChannelList.txt
+              path: jmsChannelList.txt
+      - name: jms-topic-list-txt
+        configMap:
+          name: um-demo-my-project-assets-configmap
+          items:
+            - key: jmsTopicList.txt
+              path: jmsTopicList.txt
+      - name: wm-native-channel-list-txt
+        configMap:
+          name: um-demo-my-project-assets-configmap
+          items:
+            - key: wmNativeChannelList.txt
+              path: wmNativeChannelList.txt                       
+      - name: data
+        persistentVolumeClaim:
+          claimName: bpm-demo-um-data-0-pvc
+      - name: logs
+        persistentVolumeClaim:
+          claimName: bpm-demo-um-log-0-pvc              
+      imagePullSecrets:
+      #- name: container-image-registry-creds
+      - name: regcred
+      

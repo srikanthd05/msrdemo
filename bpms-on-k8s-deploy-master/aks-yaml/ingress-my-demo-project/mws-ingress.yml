@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mws-ingress
+  namespace: bpms-load-test
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+    nginx.ingress.kubernetes.io/session-cookie-name: bpmspocmwsroute
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mymws.bpmspoc31032023.internal.net
+    http:
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: mws-demo-my-project-svc
+              port:
+                number: 8585

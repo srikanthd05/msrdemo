@@ -1,0 +1,33 @@
+<ehcache     
+    name="SoftwareAG.IS.PE"     
+    monitoring="on">    
+    <diskStore         
+        path="./cacheStore/SoftwareAG-IS-PE"/>    
+    <cacheManagerEventListenerFactory         
+        class=""         
+        properties=""/>    
+    <defaultCache         
+        maxEntriesLocalHeap="10000"         
+        timeToIdleSeconds="120"         
+        timeToLiveSeconds="120"         
+        maxEntriesLocalDisk="10000000"/>    
+    <cache         
+        name="StepLatch"         
+        eternal="true"         
+        maxEntriesLocalHeap="1000"         
+        overflowToOffHeap="false">        
+        <persistence             
+            strategy="none"/>        
+        <terracotta             
+            clustered="false"             
+            consistency="STRONG">            
+            <nonstop/>        
+        </terracotta>    
+    </cache>    
+    <cache         
+        name="FailedProcessAudit"         
+        eternal="true"         
+        maxEntriesLocalHeap="1000"         
+        diskPersistent="true"         
+        overflowToDisk="true"/>
+</ehcache>

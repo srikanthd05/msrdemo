@@ -1,0 +1,126 @@
+pipeline {
+    agent any 
+
+    environment {
+        
+        IMAGE_REGISTRY_CRED = credentials('adit_acr')
+        IMAGE_REGISTRY_URL = "registry-144fd7c1.nip.io/v2"
+        SAG_IMAGE_REGISTRY_CRED = credentials('sag_adit_acr')
+        SAG_IMAGE_REGISTRY_URL = "sagcr.azurecr.io/v2"
+
+                 
+        
+    }
+
+    stages {
+        
+                 stage('build image for rules') {
+                when {
+				expression {
+					 params.buildRULESimage == 'true'
+
+				}   
+                }
+
+            steps {
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------starting the Rules build process------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  sh """
+                  cd ${workspace}/rules
+                  echo "build process started for rules"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Building image------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  docker build --no-cache -t wm1015rules-mydemo-myproject:$imageTag .
+                  docker tag wm1015rules-mydemo-myproject:$imageTag registry-144fd7c1.nip.io/v2/wm1015rules-mydemo-myproject:$imageTag
+                  docker login --username ${IMAGE_REGISTRY_CRED_USR} --password ${IMAGE_REGISTRY_CRED_PSW} ${IMAGE_REGISTRY_URL}
+                  docker push registry-144fd7c1.nip.io/v2/wm1015rules-mydemo-myproject:$imageTag
+                  docker logout
+                  docker rmi registry-144fd7c1.nip.io/v2/wm1015rules-mydemo-myproject:$imageTag
+                  docker rmi wm1015rules-mydemo-myproject:$imageTag
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------pushing the rules image to docker registry------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Build process finished ------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"  
+                     """
+            }
+        }
+
+         stage('build image for bpm') {
+                when {
+				expression {
+					 params.buildBPMimage == 'true'
+
+				}   
+                }
+
+            steps {
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------starting the BPM build process------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  sh """
+                  cd ${workspace}/bpm
+                  echo "build process started for BPM"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Building image------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  docker build --no-cache -t wm1015bpm-mydemo-myproject:$imageTag .
+                  docker tag wm1015bpm-mydemo-myproject:$imageTag registry-144fd7c1.nip.io/v2/wm1015bpm-mydemo-myproject:$imageTag
+                  docker login --username ${IMAGE_REGISTRY_CRED_USR} --password ${IMAGE_REGISTRY_CRED_PSW} ${IMAGE_REGISTRY_URL}
+                  docker push registry-144fd7c1.nip.io/v2/wm1015bpm-mydemo-myproject:$imageTag
+                  docker logout
+                  docker rmi registry-144fd7c1.nip.io/v2/wm1015bpm-mydemo-myproject:$imageTag
+                  docker rmi wm1015bpm-mydemo-myproject:$imageTag
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------pushing the BPM image to docker registry------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Build process finished ------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"  
+                     """
+            }
+        }
+
+                stage('build image for MWS') {
+                when { 
+				expression {
+					 params.buildMWSImage == 'true'
+                }
+				  
+                }
+
+            steps {
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------starting the build for MWS------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  sh """ 
+                  cd ${workspace}/mws
+                  echo "build process started for MWS "  
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Building image------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  docker build --no-cache -t wm1015mws-mydemo-myproject:$imageTag .
+                  docker tag wm1015mws-mydemo-myproject:$imageTag registry-144fd7c1.nip.io/v2/wm1015mws-mydemo-myproject:$imageTag
+                  docker login --username ${IMAGE_REGISTRY_CRED_USR} --password ${IMAGE_REGISTRY_CRED_PSW} ${IMAGE_REGISTRY_URL}
+                  docker push registry-144fd7c1.nip.io/v2/wm1015mws-mydemo-myproject:$imageTag
+                  docker logout
+                  docker rmi registry-144fd7c1.nip.io/v2/wm1015mws-mydemo-myproject:$imageTag
+                  docker rmi wm1015mws-mydemo-myproject:$imageTag
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------pushing the MWS image to docker registry------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Build process finished ------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"  
+                     """   	
+                     
+            }
+        }
+
+        stage('build image for UM') {
+                when {
+					expression {
+					 params.buildUmImage == 'true'
+                }
+				  
+                }
+
+            steps {
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Starting the build process for UM------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  sh """
+                  cd ${workspace}/um
+                  echo "build process started for UM "  
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Building image------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  docker build --no-cache -t wm1015um-mydemo-myproject:$imageTag .
+                  docker tag wm1015um-mydemo-myproject:$imageTag registry-144fd7c1.nip.io/v2/wm1015um-mydemo-myproject:$imageTag
+                  docker login --username ${IMAGE_REGISTRY_CRED_USR} --password ${IMAGE_REGISTRY_CRED_PSW} ${IMAGE_REGISTRY_URL}
+                  docker push registry-144fd7c1.nip.io/v2/wm1015um-mydemo-myproject:$imageTag
+                  docker logout
+                  docker rmi registry-144fd7c1.nip.io/v2/wm1015um-mydemo-myproject:$imageTag
+                  docker rmi wm1015um-mydemo-myproject:$imageTag
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------pushing the UM image to docker registry------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------Build process finished ------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"  
+                     """
+            }
+        }
+    }
+}

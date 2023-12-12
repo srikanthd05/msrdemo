@@ -1,0 +1,41 @@
+pipeline {
+    agent any 
+    
+     environment {
+        
+        KUBECONFIG = "--kubeconfig=/opt/k8s/.kube/config"
+       
+    }
+   
+    stages {
+
+         stage('deploy BPM') {
+            steps {
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<-------------starting the deployment Process------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                  sh """
+                  echo "<<<------------------Updating the Kubernetes yaml files for BPM------------------------------------------------------->>>"
+                  echo "-----current myDemoProject-bpm-deployment.yml contents shown below------"
+                  cat ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-deployment.yml
+                  echo "-------------------------------------------------------------------------"
+                  echo "-----Updated myDemoProject-bpm-deployment.yml contents shown below------"
+                  sed -i 's/replicas: 1/replicas: $numberOfPods/g' ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-deployment.yml
+                  cat ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-deployment.yml
+                  echo "<<<------------------Done updating the Kubernetes yaml files for BPM------------------------------------------------------->>>"
+                  echo "deployment will have $numberOfPods replicas as requested"
+                  echo "-------------------------------------------------------------------------"
+                  echo "<<<------------------Applying the Kubernetes yaml files------------------------------------------------------->>>"
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-configMap-prt-settings.yml ${KUBECONFIG}
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-bpms-is-license-configMap.yml ${KUBECONFIG}
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-business-rules-license-configMap.yml ${KUBECONFIG}
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-configMap-settings.yml ${KUBECONFIG}
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-svc-cluster-ip.yml ${KUBECONFIG}
+                  kubectl apply -f ./aks-yaml/bpm-my-demo-project/myDemoProject-bpm-deployment.yml ${KUBECONFIG}
+                  echo "<<<-----------------Done applying the Kubernetes yaml files------------------------------------------------------->>>"
+                    """     
+                 echo "<<<<<<<<<<<<<<<<<<<<<<<<-------------Deployment Process Finished------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"    
+            }
+        }
+
+       
+    }
+}

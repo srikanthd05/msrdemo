@@ -1,0 +1,34 @@
+<CONFIG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="http://www.webmethods.com/schema/xmlImport.xsd"
+>
+	<CONTEXT alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app">
+		<folder name="ApproveUserAge Inbox" description="ApproveUserAge Inbox" alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.inbox" isTaskFolder="true">
+			<Mode type="sync">
+	            <page>
+	            	<row>
+	            		<column>
+	            			
+	            			<mysecondprocesstasks___approveuserageinboxbar 
+	                            name="Search For"
+	            				description="Search for ApproveUserAge"
+	                            alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.inbox.bar">
+	                        </mysecondprocesstasks___approveuserageinboxbar>
+	                        
+	                        
+	                        <mysecondprocesstasks___approveuserageinboxresults
+	                            name="Task Results"
+	                            description="ApproveUserAge search results"
+	                            alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.inbox.result">
+								
+	                            <wiring name="queryString" portlet="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.inbox.bar" property="lastSearchState"/>
+	                            
+	                        </mysecondprocesstasks___approveuserageinboxresults>
+	                        
+	                    </column>
+	                </row>
+	                <hobos/>
+	            </page>
+	        </Mode>
+        </folder>
+    </CONTEXT>
+</CONFIG>

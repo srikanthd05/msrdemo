@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:caf_f="http://webmethods.com/jsf/caf/core"
+	xmlns:caf_h="http://webmethods.com/jsf/caf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:mws_h="http://webmethods.com/jsf/mws/html">
+<ui:composition>
+	<caf_f:view pageManagedBean="ApproveUserAgeViewDefaultxhtmlView"
+		preferencesBean="ApproveUserAgeView">
+		<caf_f:design-time-attribute name="taskTypeID"
+			value="DC7A2A18-760F-8C98-648C-93A129E077C0"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="taskPortletType" value="taskView"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="portlet" value="ApproveUserAgeView"></caf_f:design-time-attribute>
+		<caf_h:form defaultFocus="_first" id="taskViewForm">
+			<caf_h:formattedMessages globalOnly="true">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+			</caf_h:formattedMessages>
+			<caf_h:panelPropertySubGroup id="taskDataSubGroup"
+				label='#{activePreferencesBean.portletResourcesProvider["view.task.data.todo"]}'>
+				<f:facet name="label"></f:facet>
+			<caf_h:panelPropertyLine label="age" id="propertyLine"><caf_h:inputText width="input20" id="htmlInputText" value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskData.age}"></caf_h:inputText></caf_h:panelPropertyLine></caf_h:panelPropertySubGroup>
+			<caf_h:oneWayToggleButton rendered="false"
+				for=":taskViewForm:optionalPanel"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.toggle.task.info"]}'>
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+			</caf_h:oneWayToggleButton>
+			<caf_h:panelHideable id="optionalPanel">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<caf_h:panelPropertySubGroup
+					label='#{activePreferencesBean.portletResourcesProvider["view.task.task.info"]}'>
+					<f:facet name="label"></f:facet>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.name"]}'>
+						<caf_h:outputText id="nameText"
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.name}"></caf_h:outputText>
+					</caf_h:panelPropertyLine>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.description"]}'>
+						<caf_h:outputText id="descriptionText"
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.description}"></caf_h:outputText>
+					</caf_h:panelPropertyLine>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.created.on"]}'>
+						<caf_h:outputText
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.createdDate}">
+							<caf_f:convertFormattedDateTime displayTime="true"
+								timePrecision="0"
+								pattern='#{portletUserAttributes["user.default.date.format"]}'
+								timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+								patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+						</caf_h:outputText>
+						<caf_h:outputFormat style="padding-left: 0.5em;&#10;"
+							id="htmlOutputFormat1"
+							value='#{activePreferencesBean.portletResourcesProvider["view.task.by"]}'>
+							<f:param
+								value="#{ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.createdByDisplayName}"></f:param>
+						</caf_h:outputFormat>
+					</caf_h:panelPropertyLine>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.last.modified"]}'>
+						<caf_h:outputText
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.lastModifiedDate}">
+							<caf_f:convertFormattedDateTime displayTime="true"
+								timePrecision="0"
+								pattern='#{portletUserAttributes["user.default.date.format"]}'
+								timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+								patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+						</caf_h:outputText>
+						<caf_h:outputFormat style="padding-left:0.5em"
+							id="htmlOutputFormat2"
+							value='#{activePreferencesBean.portletResourcesProvider["view.task.by"]}'>
+							<f:param
+								value="#{ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.lastModifiedDisplayName}"></f:param>
+						</caf_h:outputFormat>
+					</caf_h:panelPropertyLine>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.expires"]}'>
+						<caf_h:outputText
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.expireDate}">
+							<caf_f:convertFormattedDateTime displayTime="true"
+								timePrecision="0"
+								pattern='#{portletUserAttributes["user.default.date.format"]}'
+								timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+								patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+						</caf_h:outputText>
+					</caf_h:panelPropertyLine>
+					<caf_h:panelPropertyLine
+						label='#{activePreferencesBean.portletResourcesProvider["view.task.status"]}'>
+						<caf_h:selectOneOutputText id="statusText"
+							value="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.status}">
+							<caf_f:selectItem itemValue="active" id="activeStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.active"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="cancelled" id="cancelledStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.canceled"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="completed" id="completedStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.completed"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="error" id="errorStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.error"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="expired" id="expiredStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.expired"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="suspended" id="suspendedStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.suspended"]}'></caf_f:selectItem>
+							<caf_f:selectItem itemValue="scheduled" id="scheduledStatusItem"
+								itemLabel='#{activePreferencesBean.portletResourcesProvider["view.task.scheduled"]}'></caf_f:selectItem>
+						</caf_h:selectOneOutputText>
+					</caf_h:panelPropertyLine>
+				</caf_h:panelPropertySubGroup>
+			</caf_h:panelHideable>
+			<caf_h:panelSubmitGroup>
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<f:facet name="submit">
+					<caf_h:asyncCommandButton
+						action="#{ApproveUserAgeViewDefaultxhtmlView.submitTask}"
+						disabled="#{not ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.activeStatus}"
+						value='#{activePreferencesBean.portletResourcesProvider["view.task.submit"]}'
+						rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.autoAccept or ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.currentUserAccepted}"></caf_h:asyncCommandButton>
+				</f:facet>
+				<f:facet name="cancel">
+					<caf_h:commandButton
+						action="#{ApproveUserAgeViewDefaultxhtmlView.cancelView}"
+						value='#{activePreferencesBean.portletResourcesProvider["view.task.return"]}'
+						rendered="#{not empty activePreferencesBean.finishUrl}"></caf_h:commandButton>
+				</f:facet>
+				<f:facet name="previous">
+					<caf_h:asyncCommandButton
+						action="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.acceptTask}"
+						disabled="#{not ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.activeStatus}"
+						value='#{activePreferencesBean.portletResourcesProvider["view.task.accept"]}'
+						rendered="#{not ApproveUserAgeViewDefaultxhtmlView.approveUserAge.autoAccept and not ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.currentUserAccepted}"></caf_h:asyncCommandButton>
+				</f:facet>
+				<f:facet name="next">
+					<caf_h:asyncCommandButton
+						action="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.unacceptTask}"
+						disabled="#{not ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.activeStatus}"
+						value='#{activePreferencesBean.portletResourcesProvider["view.task.release"]}'
+						rendered="#{not ApproveUserAgeViewDefaultxhtmlView.approveUserAge.autoAccept and ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.currentUserAccepted}"></caf_h:asyncCommandButton>
+				</f:facet>
+				<caf_h:oneWayToggleButton
+					rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.isVotable == 1}"
+					for="htmlForm:hideablePanel"
+					style="position:absolute;&#10;left:20px;" id="toggleVotingChart"
+					value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.chart"]}'></caf_h:oneWayToggleButton>
+				<caf_h:oneWayToggleButton
+					rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.isVotable == 1 and ApproveUserAgeViewDefaultxhtmlView.hasVotingDetailsPermission}"
+					for="htmlForm:modalDialog"
+					style="position:absolute;&#10;left:100px;" id="toggleVotingDetails"
+					value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details"]}'></caf_h:oneWayToggleButton>
+				<caf_h:commandButton
+					action="#{ApproveUserAgeViewDefaultxhtmlView.completeTask}"
+					disabled="#{not ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.activeStatus}"
+					value='#{activePreferencesBean.portletResourcesProvider["view.task.complete"]}'
+					rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.autoAccept or ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.currentUserAccepted}"></caf_h:commandButton>
+				<caf_h:oneWayToggleButton
+					rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.adhocRouting}"
+					for=":assignToForm:assignedPrincipalPicker"
+					disabled="#{not ApproveUserAgeViewDefaultxhtmlView.taskDisplayProvider.activeStatus}"
+					id="toggleAssignedPrincipalPicker"
+					value='#{activePreferencesBean.portletResourcesProvider["view.task.assign.users"]}'
+					way="show"></caf_h:oneWayToggleButton>
+			</caf_h:panelSubmitGroup>
+		</caf_h:form>
+		<caf_h:form defaultFocus="_first" id="htmlForm">
+			<caf_f:design-time-attribute name="rolledUp" value="false"></caf_f:design-time-attribute>
+			<h:inputHidden id="htmlInputHiddenMapOfUsers"
+				value="#{ApproveUserAgeViewDefaultxhtmlView.taskVotingCount}"></h:inputHidden>
+			<h:inputHidden id="htmlInputHiddenThreshold"
+				value="#{ApproveUserAgeViewDefaultxhtmlView.taskVotingThreshold}"></h:inputHidden>
+			<h:inputHidden id="htmlInputHiddenTotalUserAssigned"
+				value="#{ApproveUserAgeViewDefaultxhtmlView.totalUserAssignedCount}"></h:inputHidden>
+			<h:inputHidden id="htmlInputHiddenVotingStrategy"
+				value="#{ApproveUserAgeViewDefaultxhtmlView.taskVotingStrategy}"></h:inputHidden>
+			<h:inputHidden id="TaskStatusActive"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.active"]}'></h:inputHidden>
+			<h:inputHidden id="TaskStatusSuspended"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.suspended"]}'></h:inputHidden>
+			<h:inputHidden id="TaskStatusCompleted"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.completed"]}'></h:inputHidden>
+			<h:inputHidden id="TaskStatusError"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.error"]}'></h:inputHidden>
+			<h:inputHidden id="TaskStatusCanceled"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.canceled"]}'></h:inputHidden>
+			<h:inputHidden id="TaskStatusExpired"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.expired"]}'></h:inputHidden>
+			<h:inputHidden id="TaskVotingDetailsPercentageOfUsers"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.percentage.users"]}'></h:inputHidden>
+			<h:inputHidden id="TaskVotingDetailsNumberOfUsers"
+				value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.number.users"]}'></h:inputHidden>
+			<caf_h:panelHideable
+				rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.taskInfo.isVotable == 1}"
+				id="hideablePanel">
+				<caf_h:includeScript id="includeScript2" value="/diagram/Chart.js"></caf_h:includeScript>
+				<caf_h:includeScript id="includeScript22"
+					value="/diagram/Chart.bundle.js"></caf_h:includeScript>
+				<caf_h:includeStylesheet id="includeStylesheet1"
+					value="/diagram/Chart.css"></caf_h:includeStylesheet>
+				<caf_h:panelPropertyLine id="propertyLine"></caf_h:panelPropertyLine>
+				<caf_h:includeHtml id="includeHTML" value="/diagram/canvas.html"></caf_h:includeHtml>
+				<caf_h:scriptBlock id="script"
+					value="&#10;var mapOfStatuses=CAF.model('#{activePageBean.clientIds[&quot;htmlInputHiddenMapOfUsers&quot;]}');&#10;var threshold= CAF.model('#{activePageBean.clientIds[&quot;htmlInputHiddenThreshold&quot;]}');&#10;var ctx = document.getElementById(&quot;myChart&quot;);&#10;var strategy = document.getElementById('#{activePageBean.clientIds[&quot;htmlInputHiddenVotingStrategy&quot;]}').value;&#10;var allAssignedUsers= document.getElementById('#{activePageBean.clientIds[&quot;htmlInputHiddenTotalUserAssigned&quot;]}').value;&#10;var mapToList =mapOfStatuses.getValue().split(',');&#10;var labelPercentageOfUsers= document.getElementById('#{activePageBean.clientIds[&quot;TaskVotingDetailsPercentageOfUsers&quot;]}').value;&#10;var labelNumberOfUsers= document.getElementById('#{activePageBean.clientIds[&quot;TaskVotingDetailsNumberOfUsers&quot;]}').value;&#10;var taskStatusActive= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusActive&quot;]}').value;&#10;var taskStatusSuspended= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusSuspended&quot;]}').value;&#10;var taskStatusCompleted= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusCompleted&quot;]}').value;&#10;var taskStatusError= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusError&quot;]}').value;&#10;var taskStatusCanceled= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusCanceled&quot;]}').value;&#10;var taskStatusExpired= document.getElementById('#{activePageBean.clientIds[&quot;TaskStatusExpired&quot;]}').value;&#10;  &#10;&#10;Chart.pluginService.register({&#10;    afterDraw: function(chart) {&#10;        if (typeof chart.config.options.lineAt != 'undefined') {&#10;        	var lineAt = chart.config.options.lineAt;&#10;            var ctxPlugin = chart.chart.ctx;&#10;            ctxPlugin.lineWidth= 3;&#10;            var xAxe = chart.scales[chart.config.options.scales.xAxes[0].id];&#10;            var yAxe = chart.scales[chart.config.options.scales.yAxes[0].id];&#10;           	&#10;            // I'm not good at maths&#10;            // So I couldn't find a way to make it work ...&#10;            // ... without having the `min` property set to 0&#10;            if(yAxe.min != 0) return;&#10;            &#10;            ctxPlugin.strokeStyle = &quot;red&quot;;&#10;        	ctxPlugin.beginPath();&#10;            lineAt = (lineAt - yAxe.min) * (100 / yAxe.max);&#10;            lineAt = (100 - lineAt) / 100 * (yAxe.height) + yAxe.top;&#10;            ctxPlugin.moveTo(xAxe.left, lineAt);&#10;            ctxPlugin.lineTo(xAxe.right, lineAt);&#10;            ctxPlugin.stroke();&#10;        }&#10;    }&#10;});&#10;	function calculateMax(threshold){&#10;		if(strategy ===&quot;Percentage&quot;){&#10;			return 100;&#10;		}else{&#10;		return parseInt(threshold.getValue())*2;&#10;		}&#10;		&#10;	}&#10;  	function getLabel(){&#10;  		if(strategy ===&quot;Percentage&quot;){&#10;			return labelPercentageOfUsers+&quot; &quot;+threshold +&quot;%&quot;;&#10;		}&#10;		return labelNumberOfUsers+&quot; &quot;+threshold ;&#10;  	}&#10;	function getValue(status){&#10;		var value=null;&#10;		mapToList.forEach(function(element){   &#10;			var el= element.substring(0,element.indexOf('=')); &#10;			if(el.includes(status)){&#10;				if(element.includes('}')){&#10;					return value= element.substring(element.indexOf('=')+1,element.length-1);&#10;				}else{&#10;					return value= element.substring(element.indexOf('=')+1);&#10;				}&#10;				&#10;			}&#10;		});&#10;		if(strategy ===&quot;Percentage&quot;){&#10;			value= Math.round( ((value/allAssignedUsers)*100) * 10 ) / 10; ;&#10;		}&#10;		return value;&#10;	}&#10;var myChart = new Chart(ctx, {&#10;    type: 'bar',&#10;    data: {&#10;        labels: [taskStatusActive, taskStatusSuspended, taskStatusCompleted, taskStatusError, taskStatusCanceled, taskStatusExpired],&#10;        datasets: [{&#10;            label: getLabel(),&#10;            data: [getValue(&quot;1&quot;),getValue(&quot;2&quot;),getValue(&quot;3&quot;),getValue(&quot;4&quot;),getValue(&quot;5&quot;),getValue(&quot;6&quot;)],&#10;            backgroundColor: [&#10;             'rgba(54, 162, 235, 0.2)',&#10;                'rgba(54, 162, 235, 0.2)',&#10;                'rgba(54, 162, 235, 0.2)',&#10;                 'rgba(54, 162, 235, 0.2)',&#10;                 'rgba(54, 162, 235, 0.2)',&#10;                 'rgba(54, 162, 235, 0.2)',&#10;            ],&#10;            borderColor: [&#10;             'rgba(54, 162, 235, 1)',&#10;                 'rgba(54, 162, 235, 1)',&#10;                'rgba(54, 162, 235, 1)',&#10;                'rgba(54, 162, 235, 1)',&#10;                 'rgba(54, 162, 235, 1)',&#10;                 'rgba(54, 162, 235, 1)',&#10;            ],&#10;            borderWidth: 1&#10;        }]&#10;    },&#10;    options: {&#10;        lineAt: threshold.getValue(),&#10;        scales: {&#10;            yAxes: [{&#10;                ticks: {&#10;                    min: 0,&#10;                    max: calculateMax(threshold)&#10;                }&#10;            }]&#10;        }&#10;    }&#10;	&#10;}); &#10; &#10;"></caf_h:scriptBlock>
+				<caf_h:modalDialog id="modalDialog">
+					<f:facet name="title">
+						<caf_h:outputText id="htmlOutputText4"
+							value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.statistics"]}'></caf_h:outputText>
+					</f:facet>
+					<f:facet name="submit"></f:facet>
+					<f:facet name="cancel">
+						<caf_h:oneWayToggleButton for="modalDialog"
+							id="oneWayToggleButton1" value="OK"></caf_h:oneWayToggleButton>
+					</f:facet>
+					<f:facet name="other"></f:facet>
+					<caf_h:disjointForm style=" text-align: center" id="disjointForm">
+						<caf_h:dataTable
+							rowClasses="portlet-section-body,portlet-section-alternate"
+							id="htmlDataTable"
+							value="#{ApproveUserAgeViewDefaultxhtmlView.listOfVotingTableEntries}"
+							var="row" rows="10" headerClass="portlet-section-subheader"
+							footerClass="portlet-section-footer"
+							selectedRowClass="portlet-section-selected" width="100%">
+							<f:facet name="caption"></f:facet>
+							<f:facet name="header"></f:facet>
+							<f:facet name="footer">
+								<caf_h:dataPrevNext for="htmlForm:disjointForm:htmlDataTable"
+									id="prevNext">
+									<caf_h:panelBlock id="blockPanel">
+										<caf_h:dataTotal id="dataTotal"></caf_h:dataTotal>
+									</caf_h:panelBlock>
+								</caf_h:dataPrevNext>
+							</f:facet>
+							<f:facet name="empty"></f:facet>
+							<caf_h:columnStandard align="left" width="25%"
+								id="htmlTableColumn">
+								<f:facet name="header">
+									<caf_h:outputText id="htmlOutputText3"
+										value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.statistics.user"]}'></caf_h:outputText>
+								</f:facet>
+								<caf_h:outputText raw="true" id="htmlOutputText11"
+									value="#{row.userID}"></caf_h:outputText>
+							</caf_h:columnStandard>
+							<caf_h:columnStandard align="center" width="25%"
+								id="htmlTableColumn1">
+								<f:facet name="header">
+									<caf_h:outputText id="htmlOutputText31"
+										value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.statistics.status.voted"]}'></caf_h:outputText>
+								</f:facet>
+								<caf_h:outputText raw="true" id="htmlOutputText1"
+									value="#{row.status}"></caf_h:outputText>
+							</caf_h:columnStandard>
+							<caf_h:columnStandard align="right" width="25%"
+								id="htmlTableColumn2">
+								<f:facet name="header">
+									<caf_h:outputText id="htmlOutputText32"
+										value='#{activePreferencesBean.portletResourcesProvider["view.task.voting.details.statistics.timestamp"]}'></caf_h:outputText>
+								</f:facet>
+								<caf_h:outputText raw="true" id="htmlOutputText2"
+									value="#{row.timestamp}"></caf_h:outputText>
+							</caf_h:columnStandard>
+						</caf_h:dataTable>
+					</caf_h:disjointForm>
+				</caf_h:modalDialog>
+			</caf_h:panelHideable>
+		</caf_h:form>
+		<caf_h:form defaultFocus="_first" id="assignToForm"
+			rendered="#{ApproveUserAgeViewDefaultxhtmlView.approveUserAge.adhocRouting}">
+			<mws_h:peoplePickerDialog groupSearchAllowed="false"
+				id="assignedPrincipalPicker"
+				applyButtonActionExpression="#{ApproveUserAgeViewDefaultxhtmlView.assignToPrincipals}"
+				targetValue="#{ApproveUserAgeViewDefaultxhtmlView.principalList}">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<f:facet name="popupPanel">
+					<f:subview id="assignTargetPickerPopup">
+						<caf_h:asyncCommandLink id="showAvailability"
+							value='#{activePreferencesBean.portletResourcesProvider["view.task.show.availability"]}'
+							onclick="CAF.Popup.hideAll();" refresh="personCalendarDialog"
+							toggle="personCalendarDialog">
+							<f:param name="personURI" value="#{row.principalURI}"></f:param>
+						</caf_h:asyncCommandLink>
+					</f:subview>
+				</f:facet>
+			</mws_h:peoplePickerDialog>
+			<mws_h:personCalendarDialog id="personCalendarDialog"
+				personURI="#{param.personURI}"></mws_h:personCalendarDialog>
+		</caf_h:form>
+	</caf_f:view>
+</ui:composition>
+</html>

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service # Create service
+metadata:
+  name: postgres-cluster-ip-svc # Sets the service name
+  namespace: bpms-load-test
+  labels:
+    app: postgres # Defines app to create service for
+spec:
+  type: ClusterIP # Sets the service type
+  ports:
+    - port: 5432 # Sets the port to run the postgres application
+  selector:
+    app: postgres

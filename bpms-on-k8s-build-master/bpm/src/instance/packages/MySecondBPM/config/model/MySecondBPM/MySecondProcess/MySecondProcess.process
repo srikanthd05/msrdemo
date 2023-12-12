@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<businessProcessDiagram xmlns="http://www.webmethods.com/bpm/2006/"
+  Id="5abcaa83-8e96-4a1c-b5ce-0b370a9620e9" bpmnStyle="false" build="1"
+  canvasPool="1" creator="adit" description=""
+  failProcessOnStepFailure="false" focalRole="Focal role"
+  generateEDAEvents="true" name="MySecondProcess" processCategory=""
+  rnSync="false" runtimeVersion="1" transitionLabelPref="expression"
+  unSynchJoinDeadPath="true" version="10.2.0">
+  <kpiDimensions/>
+  <systemKPIs>
+    <systemKPI Id="" description="" name="Volume" unitOfMeasure=""/>
+    <systemKPI Id="" description="" name="Cycle Time" unitOfMeasure=""/>
+    <systemKPI Id="" description="" name="Error Count" unitOfMeasure=""/>
+  </systemKPIs>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ProcessData" name="{ProcessNamespace}ProcessData" type="{pub.prt}ProcessData"/>
+  <logicalDataItem Id="" description="" dimension="0" label="EmpDetails"
+    name="{MySecondBpmSupport.docs}EmpDetails" type="{MySecondBpmSupport.docs}EmpDetails"/>
+  <logicalDataItem Id="" description="" dimension="0" label="age"
+    name="{ProcessNamespace}age" type="{http://webmethods.com/bpm/ISType/2006}string"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ApproveUserAgeInputEnv"
+    name="{ProcessNamespace}ApproveUserAgeInputEnv" type="{pub.task}TaskQueueInfo"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="EmpAgeDetails" name="{ProcessNamespace}EmpAgeDetails" type="{MySecondBpmSupport.docs}EmpAgeDetails"/>
+  <logicalDataItem Id="" description="" dimension="0" label="EmpDetails"
+    name="{ProcessNamespace}EmpDetails" type="{MyFirstBpmSupport.docs}EmpDetails"/>
+  <logicalDataItem Id="76c5002d-2939-429c-8dc5-e0ee246661fa"
+    description="" dimension="0" label="MyTestModel_1"
+    name="{ProcessNamespace}MyTestModel_1" type="{MySecondBpmSupport.docs}EmpDetails"/>
+  <timeout calendarAlias="" calendarTime="0:0:0"
+    dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+    dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+    dynamicFieldName="" isCalendarTimeout="false" isStaticTimeout="true"
+    isXPathTimeout="false" pipelineCalendarAlias=""
+    pipelineCalendarDays="" pipelineCalendarHours=""
+    pipelineCalendarMinutes="" timeoutStyle="RELATIVE"
+    timeoutType="processTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+  <pool Id="7262fc6f-4951-42f9-870e-2719aac82ad6" blue="128"
+    containerType="BPMN_SUBPROCESS" external="true"
+    externalizeConditions="false" green="128" isCollapsed="false"
+    isCompensating="false" isTestAfter="false" label="Pool"
+    labelBlue="255" labelGreen="204" labelRed="153" logicalServer=""
+    loopMaximum="0" loopMaximumField="" name="1"
+    orientation="horizontal" red="128" retryCount="0" stepLock="false"
+    uid="P2" useCorrelation="false">
+    <documentation/>
+    <businessKPIs/>
+    <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    <poolReference Id="b8145028-653f-49be-93be-4c75b9a4f51d"
+      label="TestCorp 2" logicalServer="Default" poolName="14"
+      stepLock="false" uid="S11" useCorrelation="false" x="102" y="19">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    </poolReference>
+    <timeout calendarAlias="" calendarTime="0:0:0"
+      dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+      dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+      dynamicFieldName="" isCalendarTimeout="false"
+      isStaticTimeout="true" isXPathTimeout="false"
+      pipelineCalendarAlias="" pipelineCalendarDays=""
+      pipelineCalendarHours="" pipelineCalendarMinutes=""
+      timeoutStyle="RELATIVE" timeoutType="stepTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+    <wmExpression/>
+  </pool>
+  <pool Id="1cd3b537-18d5-4692-9bd5-f9f9d7edd21d" blue="128"
+    containerType="BPMN_SUBPROCESS" external="false"
+    externalizeConditions="false" green="128" isCollapsed="false"
+    isCompensating="false" isTestAfter="false" label="TestCorp 2"
+    labelBlue="255" labelGreen="204" labelRed="153" logicalServer=""
+    loopMaximum="0" loopMaximumField="" name="14"
+    orientation="horizontal" red="128" retryCount="0" stepLock="false"
+    uid="P15" useCorrelation="false">
+    <documentation/>
+    <businessKPIs/>
+    <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    <receiveStep Id="c7bfa187-6eeb-4d20-b810-979b58c79d21"
+      allowsSynchronousReply="false" edaEventQName="" edaSubFilter=""
+      edaSubFilterLang="" eventType="START"
+      externalizeConditions="false" height="28"
+      isStartStepServiceRequired="true"
+      jmsAliasConnection="PE_NONTRANSACTIONAL_ALIAS"
+      jmsDestination="MySecondBPM_MySecondProcess_SUBQUEUE"
+      jmsDestinationType="" label="start Emp Details 2" labelHeight="-1"
+      labelWidth="-1" logicalServer="Default"
+      outputMessageType="{MySecondBpmSupport.docs}EmpDetails"
+      receiveProtocol="JMS" receiveType="EMPTY" stepLock="false"
+      uid="S17" useCorrelation="false" width="28" x="78" y="79">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <output name="{MySecondBpmSupport.docs}EmpDetails"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <wmExpressionFilter/>
+    </receiveStep>
+    <gatewayStep Id="efa76e0c-5164-4387-ae4d-634c558d43ed"
+      externalizeConditions="false" gatewayType="EXCLUSIVE" height="34"
+      label="checkAge" labelHeight="-1" labelWidth="-1"
+      logicalServer="Default" retryCount="0" stepLock="false" uid="S25"
+      useCorrelation="false" width="34" x="432" y="53">
+      <documentation/>
+      <join joinType="UnsynchronizedOr" suppressJoinFailure="false" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}age"/>
+      <input name="{ProcessNamespace}EmpAgeDetails"/>
+      <input name="{MySecondBpmSupport.docs}EmpDetails"/>
+      <output name="{ProcessNamespace}age"/>
+      <output name="{ProcessNamespace}EmpAgeDetails"/>
+      <output name="{MySecondBpmSupport.docs}EmpDetails"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </gatewayStep>
+    <terminateStep Id="81149442-1c89-4421-991e-419c88cc31c0"
+      escalateFailure="true" height="28" label="EndProcess"
+      labelHeight="-1" labelWidth="-1" logicalServer="Default"
+      stepLock="false" terminateStatus="DONE" uid="S59"
+      useCorrelation="false" width="28" x="1274" y="56">
+      <documentation/>
+      <join joinType="UnsynchronizedOr" suppressJoinFailure="false" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+    </terminateStep>
+    <gatewayStep Id="fdfbb267-4909-4813-88a4-832b86007b27"
+      externalizeConditions="false" gatewayType="EXCLUSIVE" height="34"
+      label="verifyAgeForResubmission" labelHeight="-1" labelWidth="-1"
+      logicalServer="Default" retryCount="0" stepLock="false" uid="S85"
+      useCorrelation="false" width="34" x="742" y="231">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}age"/>
+      <input name="{ProcessNamespace}EmpAgeDetails"/>
+      <output name="{ProcessNamespace}age"/>
+      <output name="{ProcessNamespace}EmpAgeDetails"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </gatewayStep>
+    <invokeStep Id="0e0de442-60bd-4f9a-96b9-beeb5a91d150"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="60" inputMessageType="Unconfigured"
+      invokeContainer="MySecondBpmSupport.svc"
+      invokeId="MySecondBpmSupport.svc:logToServer" invokeLocation=""
+      invokeName="logToServer" invokeType="ISSERVICE"
+      isCompensating="false" isTestAfter="false"
+      label="MyFirstServiceTask" labelHeight="-1" labelWidth="-1"
+      logicalServer="Default" loopMaximum="0" loopMaximumField=""
+      ornamentKey="32_workflow.png" outputMessageType="Unconfigured"
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S18" useCorrelation="false" width="93"
+      x="224" y="63">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{MySecondBpmSupport.docs}EmpDetails"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}age"/>
+      <output name="{ProcessNamespace}EmpAgeDetails"/>
+      <output name="{MySecondBpmSupport.docs}EmpDetails"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="57a85a67-32f5-42f8-a87f-02fa14dc3d5c"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="60" invokeContainer="P/MySecondProcessTasks"
+      invokeId="DC7A2A18-760F-8C98-648C-93A129E077C0" invokeLocation=""
+      invokeName="ApproveUserAge" invokeType="TASK"
+      isCompensating="false" isTestAfter="false" label="ApproveUserAge"
+      labelHeight="-1" labelWidth="-1" logicalServer="Default"
+      loopMaximum="0" loopMaximumField="" retryCount="0"
+      routingRuleSet="" ruleType="TASK" stepLock="false" uid="S33"
+      useCorrelation="false" width="93" x="537" y="218">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}age"/>
+      <input name="{ProcessNamespace}EmpAgeDetails"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}age"/>
+      <output name="{ProcessNamespace}EmpAgeDetails"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="ccab5b04-650f-4644-9fe5-58677f30cb96"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="60" invokeContainer=""
+      invokeId="MySecondBPM/MySecondBPM_FirstSubProcess"
+      invokeLocation="" invokeName="MySecondBPM_FirstSubProcess"
+      invokeType="REFPROCESS" isCompensating="false" isTestAfter="false"
+      label="SendEmail_CallActivity" labelHeight="-1" labelWidth="-1"
+      logicalServer="Default" loopMaximum="0" loopMaximumField=""
+      ornamentKey="32_envelope.png" retryCount="0" routingRuleSet=""
+      ruleType="CALL_ACTIVITY" stepLock="false" uid="S62"
+      useCorrelation="false" width="93" x="1026" y="218">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}EmpAgeDetails"/>
+      <input name="{ProcessNamespace}age"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}age"/>
+      <output name="{ProcessNamespace}ApproveUserAgeInputEnv"/>
+      <extendedProperty name="noneStartEvents" value="S9"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="refProcessOutput" value="[]"/>
+      <extendedProperty name="startMessageEvents" value="S10"/>
+      <extendedProperty name="catchEventProtocol" value="[JMS, JMS]"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <container Id="c3ecf5fe-dc3f-484a-afd0-fe3645f74699" blue="248"
+      collapsedHeight="60" collapsedWidth="93"
+      containerType="BPMN_SUBPROCESS" externalizeConditions="false"
+      green="248" height="124" isCollapsed="false"
+      isCompensating="false" isTestAfter="false"
+      label="VerifyDepartment_SubProcess" labelHeight="-1"
+      labelWidth="-1" logicalServer="Default" loopMaximum="0"
+      loopMaximumField="" red="248" retryCount="0" stepLock="false"
+      uid="C68" useCorrelation="false" width="489" x="654" y="8">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <invokeStep Id="a679be8d-c1c6-4581-ae5b-47fe95d924cd"
+        dynamicReferenceProcess="false" externalizeConditions="false"
+        height="60" inputMessageType="Unconfigured"
+        invokeContainer="MySecondBpmSupport.svc"
+        invokeId="MySecondBpmSupport.svc:logToServer" invokeLocation=""
+        invokeName="logToServer" invokeType="ISSERVICE"
+        isCompensating="false" isTestAfter="false"
+        label="MySecondServiceTask" labelHeight="-1" labelWidth="-1"
+        logicalServer="Default" loopMaximum="0" loopMaximumField=""
+        ornamentKey="32_workflow.png" outputMessageType="Unconfigured"
+        retryCount="0" routingRuleSet="" ruleType="WMRULE"
+        stepLock="false" uid="S51" useCorrelation="false" width="93"
+        x="371" y="25">
+        <documentation/>
+        <businessKPIs/>
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+        <input name="{ProcessNamespace}MyTestModel_1"/>
+        <wmExpression/>
+        <extendedProperty name="retries" value="0"/>
+        <extendedProperty name="retryInterval" value="60000"/>
+        <timeout calendarAlias="" calendarTime="0:0:0"
+          dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+          dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+          dynamicFieldName="" isCalendarTimeout="false"
+          isStaticTimeout="true" isXPathTimeout="false"
+          pipelineCalendarAlias="" pipelineCalendarDays=""
+          pipelineCalendarHours="" pipelineCalendarMinutes=""
+          timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+          timeoutValue="0" xpathTimeoutValue=""/>
+      </invokeStep>
+      <invokeStep Id="417b4ef1-9a5d-49ec-8a9e-e57b4895804f"
+        dynamicReferenceProcess="false" externalizeConditions="false"
+        height="60" invokeContainer="" invokeId="" invokeLocation=""
+        invokeName="" invokeType="EMPTY" isCompensating="false"
+        isTestAfter="false" label="MyFirstAbstractTask" labelHeight="-1"
+        labelWidth="-1" logicalServer="Default" loopMaximum="0"
+        loopMaximumField="" ornamentKey="32_workflow.png" retryCount="0"
+        routingRuleSet="" ruleType="WMRULE" stepLock="false" uid="S54"
+        useCorrelation="false" width="93" x="25" y="25">
+        <documentation/>
+        <businessKPIs/>
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+        <input name="{ProcessNamespace}EmpDetails"/>
+        <input name="{ProcessNamespace}age"/>
+        <wmExpression/>
+        <output name="{ProcessNamespace}EmpDetails"/>
+        <output name="{ProcessNamespace}age"/>
+        <extendedProperty name="retries" value="0"/>
+        <extendedProperty name="retryInterval" value="60000"/>
+        <timeout calendarAlias="" calendarTime="0:0:0"
+          dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+          dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+          dynamicFieldName="" isCalendarTimeout="false"
+          isStaticTimeout="true" isXPathTimeout="false"
+          pipelineCalendarAlias="" pipelineCalendarDays=""
+          pipelineCalendarHours="" pipelineCalendarMinutes=""
+          timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+          timeoutValue="0" xpathTimeoutValue=""/>
+      </invokeStep>
+      <invokeStep Id="23a5b917-bd3a-4c45-99fc-91b6f6a89678"
+        dynamicReferenceProcess="false" externalizeConditions="false"
+        height="60" invokeContainer="MyNewRuleTest"
+        invokeId="VerifyDept" invokeLocation="" invokeName="VerifyDept"
+        invokeType="RULE" isCompensating="false" isTestAfter="false"
+        label="VerifyDept" labelHeight="-1" labelWidth="-1"
+        logicalServer="Default" loopMaximum="0" loopMaximumField=""
+        ornamentKey="32_spreadsheet.png" retryCount="0"
+        routingRuleSet="" ruleType="WMRULE" stepLock="false" uid="S48"
+        useCorrelation="false" width="93" x="190" y="25">
+        <documentation/>
+        <businessKPIs/>
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+        <input name="{ProcessNamespace}MyTestModel_1"/>
+        <input name="{ProcessNamespace}age"/>
+        <wmExpression/>
+        <output name="{ProcessNamespace}MyTestModel_1"/>
+        <extendedProperty name="retries" value="0"/>
+        <extendedProperty name="ruleSetName" value="VerifyDept"/>
+        <extendedProperty name="ruleSetCategory" value="DT"/>
+        <extendedProperty name="retryInterval" value="60000"/>
+        <timeout calendarAlias="" calendarTime="0:0:0"
+          dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+          dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+          dynamicFieldName="" isCalendarTimeout="false"
+          isStaticTimeout="true" isXPathTimeout="false"
+          pipelineCalendarAlias="" pipelineCalendarDays=""
+          pipelineCalendarHours="" pipelineCalendarMinutes=""
+          timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+          timeoutValue="0" xpathTimeoutValue=""/>
+        <InputParameters>
+          <InputParameter
+            ClassName="pkgMyNewRuleTest.pkgData20Models.DMMyTestModel" ParameterName="MyTestModel_1"/>
+        </InputParameters>
+        <OutputParameters>
+          <OutputParameter
+            ClassName="pkgMyNewRuleTest.pkgData20Models.DMMyTestModel" ParameterName="MyTestModel_1"/>
+        </OutputParameters>
+      </invokeStep>
+      <transition Id="159825aa-d4e5-4553-a1a2-d68cbdf25db8" blue="255"
+        conditionDescription="" conditionText="" conditionType="IF"
+        green="0" lineShape="STRAIGHT" red="0" source="S48"
+        sourceLocation="283,55" sourceTerminal="RIGHT" target="S51"
+        targetLocation="371,55" targetTerminal="LEFT" uid="T52">
+        <bendpoint index="0" location="326,55" weight="0.5"/>
+        <bendpoint index="1" location="326,55" weight="0.5"/>
+        <labelLayout blue="0" defaultLocation="true" green="196"
+          height="-1" red="255" width="-1" x="-1" y="-1">
+          <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+            <fontColor blue="0" green="0" red="0"/>
+          </fontData>
+        </labelLayout>
+        <wmExpression/>
+      </transition>
+      <transition Id="445212dc-875a-47fb-818e-46ad798e990b" blue="255"
+        conditionDescription="" conditionText="" conditionType="IF"
+        green="0" lineShape="STRAIGHT" red="0" source="S54"
+        sourceLocation="118,55" sourceTerminal="RIGHT" target="S48"
+        targetLocation="190,55" targetTerminal="LEFT" uid="T56">
+        <bendpoint index="0" location="154,55" weight="0.5"/>
+        <bendpoint index="1" location="154,55" weight="0.5"/>
+        <labelLayout blue="0" defaultLocation="true" green="196"
+          height="-1" red="255" width="-1" x="-1" y="-1">
+          <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+            <fontColor blue="0" green="0" red="0"/>
+          </fontData>
+        </labelLayout>
+        <wmExpression/>
+      </transition>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+      <wmExpression/>
+    </container>
+    <transition Id="282e7bb2-0f7b-4aac-9b30-7cf57dc5e507" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S17"
+      sourceLocation="106,93" sourceTerminal="RIGHT" target="S18"
+      targetLocation="224,93" targetTerminal="LEFT" uid="T19">
+      <bendpoint index="0" location="296,113" weight="0.5"/>
+      <bendpoint index="1" location="296,113" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="e847d683-721a-4f3c-a4e9-ed190d43524f" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="C68"
+      sourceLocation="1143,70" sourceTerminal="RIGHT" target="S59"
+      targetLocation="1274,70" targetTerminal="LEFT" uid="T72">
+      <bendpoint index="0" location="1340,90" weight="0.5"/>
+      <bendpoint index="1" location="1340,90" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="db537868-8dfe-4d03-a776-7c0442d4774c" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S62"
+      sourceLocation="1119,248" sourceTerminal="RIGHT" target="S59"
+      targetLocation="1288,84" targetTerminal="BOTTOM" uid="T81">
+      <bendpoint index="0" location="1420,268" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="5bf06fb7-daf9-4573-9355-9dfb0ad5936b" blue="255"
+      conditionDescription="" conditionText="Default"
+      conditionType="ELSE" green="0" lineShape="STRAIGHT" red="0"
+      source="S25" sourceLocation="449,87" sourceTerminal="BOTTOM"
+      target="S33" targetLocation="583,218" targetTerminal="TOP" uid="T82">
+      <bendpoint index="0" location="581,172" weight="0.5"/>
+      <bendpoint index="1" location="715,172" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="16" red="255" width="40" x="646" y="151">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="d2b89070-92f6-48d5-8a77-4f4668b90a69" blue="255"
+      conditionDescription="" conditionText="age > 21"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S25" sourceLocation="466,70" sourceTerminal="RIGHT"
+      target="C68" targetLocation="654,70" targetTerminal="LEFT" uid="T84">
+      <bendpoint index="0" location="692,90" weight="0.5"/>
+      <bendpoint index="1" location="692,90" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="16" red="255" width="55" x="661" y="74">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="" leftFieldPath=""
+          leftOperand="{ProcessNamespace}age" operator=">" rightOperand="'21'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="4a1e4c2e-b8f9-4867-8e18-3a41c4aea8b4" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S33"
+      sourceLocation="630,248" sourceTerminal="RIGHT" target="S85"
+      targetLocation="742,248" targetTerminal="LEFT" uid="T86">
+      <bendpoint index="0" location="818,268" weight="0.5"/>
+      <bendpoint index="1" location="818,268" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="2ce22a75-98be-48dc-8058-0dc02ee31c70" blue="255"
+      conditionDescription=""
+      conditionText="age >= 18 and&#xa;age != 50" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S85"
+      sourceLocation="776,248" sourceTerminal="RIGHT" target="S62"
+      targetLocation="1026,248" targetTerminal="LEFT" uid="T87">
+      <bendpoint index="0" location="1032,268" weight="0.5"/>
+      <bendpoint index="1" location="1032,268" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="40" red="255" width="177" x="952" y="225">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="and" leftFieldPath=""
+          leftOperand="{ProcessNamespace}age" operator=">=" rightOperand="'18'"/>
+        <row chainOperator="" leftFieldPath=""
+          leftOperand="{ProcessNamespace}age" operator="!=" rightOperand="'50'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="6c05cd9a-d055-4625-92d2-fe176a35f29d" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S18"
+      sourceLocation="317,93" sourceTerminal="RIGHT" target="S25"
+      targetLocation="449,53" targetTerminal="TOP" uid="T90">
+      <bendpoint index="0" location="514,113" weight="0.5"/>
+      <bendpoint index="1" location="514,62" weight="0.5"/>
+      <bendpoint index="2" location="581,62" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="dd68af0e-cdf0-453c-9199-e1b83945d442" blue="255"
+      conditionDescription=""
+      conditionText="age &lt; 18 or&#xa;age = 50" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S85"
+      sourceLocation="759,265" sourceTerminal="BOTTOM" target="S25"
+      targetLocation="432,70" targetTerminal="LEFT" uid="T92">
+      <bendpoint index="0" location="891,326" weight="0.5"/>
+      <bendpoint index="1" location="546,326" weight="0.5"/>
+      <bendpoint index="2" location="546,90" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="33" red="255" width="163" x="631" y="338">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="or" leftFieldPath=""
+          leftOperand="{ProcessNamespace}age" operator="&lt;" rightOperand="'18'"/>
+        <row chainOperator="" leftFieldPath=""
+          leftOperand="{ProcessNamespace}age" operator="=" rightOperand="'50'"/>
+      </wmExpression>
+    </transition>
+    <timeout calendarAlias="" calendarTime="0:0:0"
+      dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+      dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+      dynamicFieldName="" isCalendarTimeout="false"
+      isStaticTimeout="true" isXPathTimeout="false"
+      pipelineCalendarAlias="" pipelineCalendarDays=""
+      pipelineCalendarHours="" pipelineCalendarMinutes=""
+      timeoutStyle="RELATIVE" timeoutType="stepTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+    <wmExpression/>
+    <swimlane Id="4506a475-750e-4746-90a5-70d8fe3f8f11" blue="204"
+      green="255" height="198" label="TestDepartment 2" labelBlue="255"
+      labelGreen="238" labelRed="221" name="TestDepartment 2" red="255"
+      uid="W16" width="1378">
+      <documentation/>
+    </swimlane>
+    <swimlane Id="1c8bc0de-4fac-4011-ae61-138ad4842a54" blue="255"
+      green="255" height="186" label="ApproverDeaprtment"
+      labelBlue="255" labelGreen="238" labelRed="221"
+      name="ApproverDeaprtment" red="128" uid="W22" width="1378">
+      <documentation/>
+    </swimlane>
+  </pool>
+  <documentation/>
+</businessProcessDiagram>

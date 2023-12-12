@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "476f30df-067e-47c9-821d-af444b3f7a74",
+		"name": "BPM-on-k8s-demo-DHL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "triggerSecondBPMProcess-Rules",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "IloveBPM@2023",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "acc",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"EmpDetails\": {\r\n\"name\": \"Aditya\",\r\n\"age\": \"50\",\r\n\"department\": \"IT\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bpm-demo-144fd7c1.nip.io/invoke/zzMyTest:triggerSecondBPMProcess",
+					"protocol": "https",
+					"host": [
+						"bpm-demo-144fd7c1",
+						"nip",
+						"io"
+					],
+					"path": [
+						"invoke",
+						"zzMyTest:triggerSecondBPMProcess"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "triggerSecondBPMProcess-Task",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "IloveBPM@2023",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"EmpDetails\": {\r\n\"name\": \"Aditya\",\r\n\"age\": \"11\",\r\n\"department\": \"IT\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bpm-demo-144fd7c1.nip.io/invoke/zzMyTest:triggerSecondBPMProcess",
+					"protocol": "https",
+					"host": [
+						"bpm-demo-144fd7c1",
+						"nip",
+						"io"
+					],
+					"path": [
+						"invoke",
+						"zzMyTest:triggerSecondBPMProcess"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.app.jdbc.JDBCBasicData">
+    <value name="alias">mws_wm_db_postgresql</value>
+    <number name="minConns" type="java.lang.Integer">1</number>
+    <number name="maxConns" type="java.lang.Integer">50</number>
+    <number name="expireTime" type="java.lang.Integer">60000</number>
+    <value name="dbURL">jdbc:wm:postgresql://bpmspoc31032023db1.postgres.database.azure.com:5432;databaseName=wm_mws</value>
+    <value name="userid">letsdobpmspoc</value>
+    <value name="pswdHandle">wm.is.admin.jdbc.mws_wm_db_postgresql</value>
+    <value name="driverAlias">DataDirect Connect JDBC PostgreSQL Driver</value>
+    <value name="description">wm_db</value>
+    <jboolean name="spyenabled">false</jboolean>
+    <value name="spyparms">SpyAttributes=(log=(file)logs/spy/mws_wm_db_postgresql.log;logTName=yes;timestamp=yes)</value>
+    <jboolean name="snoopenabled">false</jboolean>
+    <value name="snoopparms">ddtdbg.ProtocolTraceEnable=true;ddtdbg.ProtocolTraceMaxline=16;ddtdbg.ProtocolTraceLocation=logs/snoop/mws_wm_db_postgresql.log;ddtdbg.ProtocolTraceShowTime=true</value>
+    <number name="poolThreshold" type="java.lang.Integer">0</number>
+    <number name="waitingThread" type="java.lang.Integer">10</number>
+  </record>
+</IDataXMLCoder>

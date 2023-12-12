@@ -1,0 +1,32 @@
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: wm-dcc-demo-my-project
+      name: wm-dcc-demo-my-project
+      namespace: bpms-load-test
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: wm-dcc-demo-my-project
+      template:
+        metadata:
+          labels:
+            app: wm-dcc-demo-my-project
+        spec:
+          containers:
+          - image: registry-144fd7c1.nip.io/v2/wm1015bpm:v1
+            imagePullPolicy: Always
+            name: wm-dcc-demo-my-project
+            command:
+            - /bin/sh
+            - -c
+            - while true; do sleep 1800; done;  
+          securityContext:
+            runAsUser: 1724
+            runAsGroup: 1724
+            fsGroup: 1724    
+          imagePullSecrets:
+          - name: container-image-registry-creds      

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:caf_f="http://webmethods.com/jsf/caf/core"
+	xmlns:caf_h="http://webmethods.com/jsf/caf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition>
+	<caf_f:view pageManagedBean="ApproveUserAgeInboxResultsEditxhtmlView"
+		preferencesBean="ApproveUserAgeInboxResults">
+		<caf_f:design-time-attribute name="portlet"
+			value="ApproveUserAgeInboxResults"></caf_f:design-time-attribute>
+		<caf_h:form defaultFocus="_first" id="searchOptionsForm">
+			<caf_h:formattedMessages id="errorMessages"></caf_h:formattedMessages>
+			<caf_h:panelBlock style="margin:5px" id="searchOptionsPanel">
+				<caf_h:panelPropertyGroup id="displayDefaultsGroup"
+					label="Display Defaults">
+					<f:facet name="label"></f:facet>
+					<caf_h:panelStaticRow width="100%" id="staticRow">
+						<caf_h:panelStaticCell width="50%" id="staticCell">
+							<caf_h:panelPropertyLine id="propertyLine"
+								label="Number of Rows to Display">
+								<caf_h:selectOneMenu enabledClass="enabled" id="pageSizeSelect"
+									value="#{activePreferencesBean.initialPageSize}"
+									disabledClass="disabled" width="input20">
+									<caf_f:convertInteger></caf_f:convertInteger>
+									<caf_f:selectItem itemValue="10" id="selectItem" itemLabel="10"></caf_f:selectItem>
+									<caf_f:selectItem itemValue="20" id="selectItem1"
+										itemLabel="20"></caf_f:selectItem>
+									<caf_f:selectItem itemValue="50" id="selectItem2"
+										itemLabel="50"></caf_f:selectItem>
+									<caf_f:selectItem itemValue="100" id="selectItem3"
+										itemLabel="100"></caf_f:selectItem>
+									<caf_f:selectItem itemValue="-1" id="selectItem4"
+										itemLabel="Show All"></caf_f:selectItem>
+								</caf_h:selectOneMenu>
+							</caf_h:panelPropertyLine>
+						</caf_h:panelStaticCell>
+						<caf_h:panelStaticCell width="49%" id="staticCell1">
+							<caf_h:panelPropertyLine rendered="#{activePageBean.sortable}"
+								id="propertyLine1" label="Sort By">
+								<caf_h:selectOneMenu enabledClass="enabled"
+									id="initialSortBySelect"
+									value="#{activePreferencesBean.initialSortBy}"
+									disabledClass="disabled" width="input20">
+									<caf_f:selectItems id="selectItems"
+										value="#{activePageBean.sortableColumnList}"></caf_f:selectItems>
+								</caf_h:selectOneMenu>
+							</caf_h:panelPropertyLine>
+							<caf_h:panelPropertyLine rendered="#{activePageBean.sortable}"
+								id="propertyLine2" label="Sort Order">
+								<caf_h:selectOneRadio enabledClass="enabled"
+									id="initialSortAscendingRadio"
+									value="#{activePreferencesBean.initialSortAscending}"
+									layout="pageDirection" disabledClass="disabled" width="input20">
+									<caf_f:convertBoolean></caf_f:convertBoolean>
+									<caf_f:selectItem itemValue="true" id="selectItem5"
+										itemLabel="Ascending"></caf_f:selectItem>
+									<caf_f:selectItem itemValue="false" id="selectItem6"
+										itemLabel="Descending"></caf_f:selectItem>
+								</caf_h:selectOneRadio>
+							</caf_h:panelPropertyLine>
+						</caf_h:panelStaticCell>
+					</caf_h:panelStaticRow>
+				</caf_h:panelPropertyGroup>
+				<caf_h:panelPropertyGroup id="columnDisplayGroup"
+					label="Column Display">
+					<f:facet name="label"></f:facet>
+					<caf_h:scriptCustom
+						code="var selectedCols = CAF.model('#{activePageBean.clientIds[&quot;columnDisplaySwapbox&quot;]}').getValue();&#10;var emptyListWarningTextPanel= CAF.model('#{activePageBean.clientIds[&quot;emptyColumnListPanel&quot;]}');&#10;&#10;if( selectedCols.length &gt; 0 ) {&#10;  emptyListWarningTextPanel.hide();&#10;}&#10;else {&#10;  emptyListWarningTextPanel.show();&#10;}&#10;"
+						for="columnDisplaySwapbox" id="customClientScript"
+						event="onValueChange"></caf_h:scriptCustom>
+					<caf_h:panelHideable
+						visible="#{empty activePreferencesBean.columnDisplay}"
+						id="emptyColumnListPanel">
+						<caf_h:panelBlock style="height: 24px" id="blockPanel"
+							styleClass="portlet-msg-alert caf-msg-info">
+							<caf_h:panelBlock id="blockPanel1" styleClass="caf-error-summary">
+								<caf_h:panelBlock style="width:100%;" id="blockPanel2"
+									styleClass="caf-title">
+									<caf_h:outputText id="htmlOutputText"
+										value="When the selected columns list is empty, all available columns are displayed."></caf_h:outputText>
+								</caf_h:panelBlock>
+							</caf_h:panelBlock>
+						</caf_h:panelBlock>
+					</caf_h:panelHideable>
+					<caf_h:inputSwapBox availableLabel="Available Columns"
+						id="columnDisplaySwapbox"
+						value="#{activePreferencesBean.columnDisplay}" move="true"
+						selectedLabel="Selected Columns" width="input20"
+						style="height:10em">
+						<caf_f:selectItems value="#{activePageBean.viewableColumnList}"></caf_f:selectItems>
+					</caf_h:inputSwapBox>
+				</caf_h:panelPropertyGroup>
+				<caf_h:panelSubmitGroup id="propertySubmit">
+					<f:facet name="submit">
+						<caf_h:commandButton
+							action="#{activePageBean.persistDisplayOptions}" id="saveButton"
+							value="Save" width="button6"></caf_h:commandButton>
+					</f:facet>
+					<f:facet name="cancel">
+						<caf_h:commandButton
+							action="#{activePageBean.cancelDisplayOptions}" id="cancelButton"
+							value="Cancel" immediate="true" width="button6"
+							style="margin-left:5px; margin-right:5px;"></caf_h:commandButton>
+					</f:facet>
+					<f:facet name="previous"></f:facet>
+					<f:facet name="next"></f:facet>
+				</caf_h:panelSubmitGroup>
+			</caf_h:panelBlock>
+		</caf_h:form>
+	</caf_f:view>
+</ui:composition>
+</html>

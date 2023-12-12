@@ -1,0 +1,8 @@
+#Fri Mar 03 07:38:39 CET 2023
+#Fri Mar 03 07:38:39 CET 2023
+roles=autodeploy,search,taskengine,notification
+name=daeipresal63329.eur.ad.sag-node5555
+portal.http.host=daeipresal63329.eur.ad.sag
+portal.https.host=daeipresal63329.eur.ad.sag
+nodeType=IS
+portal.http.port=5555

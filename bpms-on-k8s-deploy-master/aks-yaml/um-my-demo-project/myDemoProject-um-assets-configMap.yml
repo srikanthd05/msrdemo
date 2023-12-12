@@ -1,0 +1,15 @@
+---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: bpm-demo-my-project-configmap-prt-settings
+      namespace: bpms-load-test
+    data:
+      jmsChannelList.txt: |
+        MyFirstBpm_MyFirstProcess_SUBQUEUE MyFirstBpm_MyFirstProcess_TRANSQUEUE MySecondBPM_MySecondProcess_TRANSQUEUE MySecondBPM_MySecondProcess_SUBQUEUE mytestq1 mytestq2 MySecondBPM_MySecondBPM_FirstSubProcess_SUBQUEUE MySecondBPM_MySecondBPM_FirstSubProcess_TRANSQUEUE MyThirdBPM_MyThirdProcess_SUBQUEUE MyThirdBPM_MyThirdProcess_TRANSQUEUE MyFourthBPM_MyFourthProcess_SUBQUEUE MyFourthBPM_MyFourthProcess_TRANSQUEUE
+
+      jmsTopicList.txt: |
+        PEBroadcastTopic PERestartTopic
+
+      wmNativeChannelList.txt: |
+        /wm/is/wm/prt/status/ChangeCommand    

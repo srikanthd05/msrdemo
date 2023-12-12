@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='US-ASCII'?>
+<rulebase xmlns='http://www.jessrules.com/JessML/1.0'>
+<module>
+  <name>$$MODULENAME$$</name>
+</module>
+
+<funcall>
+  <name>import</name>
+  <value type='SYMBOL'>pkgMyNewRuleTest.pkgData20Models.DMMyTestModel</value>
+  
+</funcall>
+
+<template>
+  <name>$$MODULENAME$$::DMMyTestModel</name>
+  <comment>$JAVA-OBJECT$ pkgMyNewRuleTest.pkgData20Models.DMMyTestModel</comment>
+  <properties>
+    <property>
+      <name>from-class</name>
+      <value type='SYMBOL'>pkgMyNewRuleTest.pkgData20Models.DMMyTestModel</value>
+    </property>
+    <property>
+      <name>slot-specific</name>
+      <value type='SYMBOL'>TRUE</value>
+    </property>
+  </properties>
+</template>
+
+<rule>
+  <name>$$MODULENAME$$::VerifyDept.decisiontable_dtrule1</name>
+  <lhs>
+    <group>
+      <name>and</name>
+      <pattern>
+        <name>$$MODULENAME$$::DMMyTestModel</name>
+        <slot>
+          <name>OBJECT</name>
+          <test>
+            <type>eq</type>
+            <value type='VARIABLE'>_DMMyTestModel_MyTestModel_1</value>
+            
+          </test>
+        </slot>
+      </pattern>
+      <pattern>
+        <name>$$MODULENAME$$::DMMyTestModel</name>
+        <slot>
+          <name>slotage</name>
+          <test>
+            <type>eq</type>
+            <value type='VARIABLE'>s0</value>
+            
+          </test>
+          <test>
+            <type>neq</type>
+            <conjunction>and</conjunction>
+            <value type='SYMBOL'>nil</value>
+            
+          </test>
+          <test>
+            <type>eq</type>
+            <conjunction>and</conjunction>
+            <funcall>
+              <name>checkEQ</name>
+              <value type='VARIABLE'>s0</value>
+              
+              <funcall>
+                <name>ParameterHelper.getJessString</name>
+                <value type='STRING'>50</value>
+                
+              </funcall>
+              
+            </funcall>
+            
+          </test>
+        </slot>
+        <slot>
+          <name>OBJECT</name>
+          <test>
+            <type>eq</type>
+            <value type='VARIABLE'>dm0</value>
+            
+          </test>
+          <test>
+            <type>eq</type>
+            <conjunction>and</conjunction>
+            <value type='VARIABLE'>_DMMyTestModel_MyTestModel_1</value>
+            
+          </test>
+        </slot>
+      </pattern>
+    </group>
+  </lhs>
+  <rhs>
+    <funcall>
+      <name>setMember</name>
+      <value type='VARIABLE'>_DMMyTestModel_MyTestModel_1</value>
+      
+      <funcall>
+        <name>create$</name>
+        <value type='STRING'>/department;1;0</value>
+        
+      </funcall>
+      
+      <funcall>
+        <name>ParameterHelper.getJessString</name>
+        <value type='STRING'>seniorIT</value>
+        
+      </funcall>
+      
+      <value type='SYMBOL'>FALSE</value>
+      
+      <value type='SYMBOL'>FALSE</value>
+      
+    </funcall>
+  </rhs>
+</rule>
+
+</rulebase>

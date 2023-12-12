@@ -1,0 +1,108 @@
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: bpm-demo-my-project
+      name: bpm-demo-my-project
+      namespace: bpms-load-test
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: bpm-demo-my-project
+      template:
+        metadata:
+          labels:
+            app: bpm-demo-my-project
+        spec:
+          #nodeName: aks-agentpool-14287980-vmss00004e
+          containers:
+          - image: registry-144fd7c1.nip.io/v2/wm1015bpm-mydemo-myproject:v1
+            livenessProbe:
+              failureThreshold: 600000
+              httpGet:
+                path: /invoke/wm.server/ping
+                port: 5555
+                scheme: HTTP
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              successThreshold: 1
+              timeoutSeconds: 5
+            name: bpm-demo-my-project
+            ports:
+            - containerPort: 5555
+            - containerPort: 9999
+              protocol: TCP
+            volumeMounts:
+            - name: prtcnf
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmPRT/config/prt.cnf
+              subPath: prt.cnf 
+            - name: rules-license-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmBusinessRules/config/licenseKey.xml
+              subPath: licenseKey.xml 
+            - name: bpm-license-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
+              subPath: licenseKey.xml   
+            - name: custom-wrapper-conf
+              mountPath: /opt/softwareag/profiles/IS_default/configuration/custom_wrapper.conf
+              subPath: custom_wrapper.conf 
+            - name: wm-db-postgresql-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/config/jdbc/pool/wm_db_postgresql.xml
+              subPath: wm_db_postgresql.xml   
+            - name: mws-wm-db-postgresql-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/config/jdbc/pool/mws_wm_db_postgresql.xml
+              subPath: mws_wm_db_postgresql.xml
+            readinessProbe:
+              failureThreshold: 60
+              httpGet:
+                path: /invoke/wm.server/ping
+                port: 5555
+                scheme: HTTP
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              successThreshold: 1
+              timeoutSeconds: 5
+          securityContext:
+            runAsUser: 1724
+            runAsGroup: 1724
+            fsGroup: 1724          
+          volumes:
+          - name: bpm-license-xml
+            configMap:
+              name: bpm-demo-my-project-license-configmap
+              items:
+              - key: licenseKey.xml 
+                path: licenseKey.xml        
+          - name: rules-license-xml
+            configMap:
+              name: bpm-business-rules-license-configmap
+              items:
+              - key: licenseKey.xml 
+                path: licenseKey.xml   
+          - name: prtcnf
+            configMap:
+              name: bpm-demo-my-project-configmap-prt-settings
+              items:
+              - key: prt.cnf
+                path: prt.cnf              
+          - name: custom-wrapper-conf
+            configMap:
+              name: bpm-demo-my-project-config-map
+              items:
+              - key: custom_wrapper.conf
+                path: custom_wrapper.conf
+          - name: wm-db-postgresql-xml 
+            configMap:
+              name: bpm-demo-my-project-config-map
+              items:
+              - key: wm_db_postgresql.xml 
+                path: wm_db_postgresql.xml    
+          - name: mws-wm-db-postgresql-xml
+            configMap:
+              name: bpm-demo-my-project-config-map
+              items:
+              - key: mws_wm_db_postgresql.xml
+                path: mws_wm_db_postgresql.xml  
+          imagePullSecrets:
+          - name: container-image-registry-creds      

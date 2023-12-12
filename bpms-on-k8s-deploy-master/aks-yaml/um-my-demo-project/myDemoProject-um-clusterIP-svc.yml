@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: um-demo-my-project-clusterip-svc
+  namespace: bpms-load-test
+  labels:
+    app: um-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: nsp-port
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: um-demo-my-project

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:caf_f="http://webmethods.com/jsf/caf/core"
+	xmlns:caf_h="http://webmethods.com/jsf/caf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition>
+	<caf_f:view pageManagedBean="ApproveUserAgeInboxBarDefaultxhtmlView"
+		preferencesBean="ApproveUserAgeInboxBar">
+		<caf_f:design-time-attribute name="taskTypeID"
+			value="DC7A2A18-760F-8C98-648C-93A129E077C0"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="taskPortletType"
+			value="taskInboxBar"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="portlet"
+			value="ApproveUserAgeInboxBar"></caf_f:design-time-attribute>
+		<caf_h:form
+			defaultFocus="#{activePageBean.searchBarControl.defaultFocusId}"
+			defaultCommand="#{activePageBean.searchBarControl.defaultCommandId}"
+			id="searchBarForm">
+			<caf_h:formattedMessages globalOnly="true">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+			</caf_h:formattedMessages>
+			<caf_h:panelSearchBar keywordsFieldAvailable="false"
+				id="searchBarControl" advancedSearchAvailable="false"
+				useOrConditionAvailable="false"
+				buildQueryStringActionExpression="#{activePageBean.doSearch}"
+				searchOptionsManager="#{activePageBean.searchOptionsManager}"
+				searchQueryFactory="#{activePageBean.searchQueryFactory}"
+				savedSearchProvider="#{activePageBean.savedSearchProvider}">
+				<f:facet name="refinePanel">
+					<caf_h:panelBlock id="blockPanel">
+						<caf_h:panelStaticRow style="min-width: 800px" id="staticRow">
+							<caf_f:design-time-attribute name="rolledUp" value="false"></caf_f:design-time-attribute>
+							<caf_h:panelStaticCell width="90%" id="staticCell1">
+								<caf_h:panelPropertyGroup id="taskDataPropertyGroup">
+									<caf_f:design-time-attribute name="rolledUp" value="false"></caf_f:design-time-attribute>
+									<f:facet name="label">
+										<caf_h:outputText id="htmlOutputText"
+											value='#{activePreferencesBean.portletResourcesProvider["inbox.refine.group.data.label"]}'></caf_h:outputText>
+									</f:facet>
+									<caf_h:panelPropertySubGroup id="propertySubGroup"
+										label="TODO: add your custom fields here">
+										<f:facet name="label"></f:facet>
+									</caf_h:panelPropertySubGroup>
+								</caf_h:panelPropertyGroup>
+							</caf_h:panelStaticCell>
+						</caf_h:panelStaticRow>
+						<caf_h:panelStaticRow id="staticRow4">
+							<caf_h:panelStaticCell width="45%" id="staticCell">
+								<caf_f:design-time-attribute name="rolledUp" value="false"></caf_f:design-time-attribute>
+								<caf_h:panelPropertyGroup id="groupTaskInfo">
+									<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+									<f:facet name="label">
+										<caf_h:outputText id="htmlOutputText2"
+											value='#{activePreferencesBean.portletResourcesProvider["inbox.refine.group.info.label"]}'></caf_h:outputText>
+									</f:facet>
+									<caf_h:panelStaticRow id="staticRow1">
+										<caf_h:panelStaticCell width="40%" id="staticCell3">
+											<caf_h:outputText styleClass="portlet-form-field-label"
+												id="htmlOutputText1"
+												value='#{activePreferencesBean.portletResourcesProvider["inbox.refine.task.id.label"]}:'></caf_h:outputText>
+										</caf_h:panelStaticCell>
+										<caf_h:panelStaticCell id="staticCell4" align="left">
+											<caf_h:inputText id="htmlInputText"
+												value="#{activePageBean.activeSearchQuery.refineFields.taskID}"
+												width="input10"></caf_h:inputText>
+										</caf_h:panelStaticCell>
+									</caf_h:panelStaticRow>
+									<caf_h:panelStaticRow id="staticRow2">
+										<caf_h:panelStaticCell width="40%" id="staticCell5">
+											<caf_h:outputText styleClass="portlet-form-field-label"
+												id="htmlOutputText4"
+												value='#{activePreferencesBean.portletResourcesProvider["inbox.refine.task.priority.label"]}:'></caf_h:outputText>
+										</caf_h:panelStaticCell>
+										<caf_h:panelStaticCell id="staticCell6" align="left">
+											<caf_h:selectOneMenu enabledClass="enabled"
+												id="htmlSelectOneMenu"
+												value="#{activePageBean.activeSearchQuery.refineFields.priority}"
+												disabledClass="disabled" width="input10">
+												<caf_f:selectItems id="selectItems"
+													value="#{activePageBean.taskPriorityMapProvider}"></caf_f:selectItems>
+											</caf_h:selectOneMenu>
+										</caf_h:panelStaticCell>
+									</caf_h:panelStaticRow>
+									<caf_h:panelStaticRow id="staticRow3">
+										<caf_h:panelStaticCell width="40%" id="staticCell7">
+											<caf_h:outputText styleClass="portlet-form-field-label"
+												id="htmlOutputText5"></caf_h:outputText>
+										</caf_h:panelStaticCell>
+										<caf_h:panelStaticCell id="staticCell8" align="left">
+											<caf_h:selectBooleanCheckbox id="htmlSelectBooleanCheckbox"
+												value="#{activePageBean.acceptedByCurrentUser}"
+												label='#{activePreferencesBean.portletResourcesProvider["inbox.refine.task.accepted.label"]}  '>
+												<caf_f:design-time-attribute name="rolledUp" value="false"></caf_f:design-time-attribute>
+											</caf_h:selectBooleanCheckbox>
+										</caf_h:panelStaticCell>
+									</caf_h:panelStaticRow>
+								</caf_h:panelPropertyGroup>
+							</caf_h:panelStaticCell>
+							<caf_h:panelStaticCell width="45%" id="staticCell2">
+								<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+								<caf_h:panelPropertyGroup id="groupDateRanges">
+									<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+									<f:facet name="label">
+										<caf_h:outputText id="htmlOutputText3"
+											value='#{activePreferencesBean.portletResourcesProvider["inbox.group.date.ranges"]}'></caf_h:outputText>
+									</f:facet>
+									<caf_h:inputDateRange id="createdDateRangeControl"
+										value="#{activePageBean.createdRange}"
+										label='#{activePreferencesBean.portletResourcesProvider["inbox.refine.created.label"]}'
+										layout="collapsed">
+										<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+									</caf_h:inputDateRange>
+									<caf_h:inputDateRange futureRanges="true"
+										id="expiredDateRangeControl"
+										value="#{activePageBean.expiredRange}"
+										label='#{activePreferencesBean.portletResourcesProvider["inbox.refine.expired.label"]}'
+										layout="collapsed"></caf_h:inputDateRange>
+									<caf_h:inputDateRange id="modifiedDateRangeControl"
+										value="#{activePageBean.modifiedRange}"
+										label='#{activePreferencesBean.portletResourcesProvider["inbox.refine.modified.label"]}'
+										layout="collapsed"></caf_h:inputDateRange>
+								</caf_h:panelPropertyGroup>
+							</caf_h:panelStaticCell>
+						</caf_h:panelStaticRow>
+					</caf_h:panelBlock>
+				</f:facet>
+			</caf_h:panelSearchBar>
+		</caf_h:form>
+	</caf_f:view>
+</ui:composition>
+</html>

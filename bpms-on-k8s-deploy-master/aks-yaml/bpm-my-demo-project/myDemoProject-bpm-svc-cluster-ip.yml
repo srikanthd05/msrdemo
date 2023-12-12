@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: bpm-demo-cluster-ip-svc
+  namespace: bpms-load-test
+  labels:
+    app: bpm-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 5555
+      targetPort: 5555
+    - name: https-port
+      port: 5543
+      targetPort: 5543
+  selector:
+    app: bpm-demo-my-project

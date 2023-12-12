@@ -1,0 +1,73 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mws-demo-my-project-svc
+  namespace: bpms-load-test
+  labels:
+    app: mws-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8585
+      targetPort: 8585
+  clusterIP: None
+  selector:
+    app: mws-demo-my-project
+
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mws-demo-my-project-svc-0
+  namespace: bpms-load-test
+  labels:
+    app: mws-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8585
+      targetPort: 8585
+  selector:
+    statefulset.kubernetes.io/pod-name: mws-demo-my-project-0
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mws-demo-my-project-svc-1
+  namespace: bpms-load-test
+  labels:
+    app: mws-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8585
+      targetPort: 8585
+  selector:
+    statefulset.kubernetes.io/pod-name: mws-demo-my-project-1
+
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mws-demo-my-project-svc-2
+  namespace: bpms-load-test
+  labels:
+    app: mws-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8585
+      targetPort: 8585
+  selector:
+    statefulset.kubernetes.io/pod-name: mws-demo-my-project-2
+

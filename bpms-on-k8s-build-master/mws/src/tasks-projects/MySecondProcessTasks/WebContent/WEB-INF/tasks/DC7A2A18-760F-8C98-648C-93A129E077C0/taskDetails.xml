@@ -1,0 +1,23 @@
+<CONFIG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="http://www.webmethods.com/schema/xmlImport.xsd"
+>
+	<CONTEXT alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app">
+		<folder name="ApproveUserAge Details" description="ApproveUserAge Details" alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.details.page" isTaskFolder="false">
+            <page>
+            	<row>
+            		<column>
+            			<mysecondprocesstasks___approveuserageoverview name="Task View" alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.details.portlet">
+                            <layout name="titlebar" value="false"/>
+                            <layout name="border" value="false"/>            			
+            			</mysecondprocesstasks___approveuserageoverview>             			
+                    </column>
+                </row>
+                <hobos/>
+            </page>
+        </folder>
+        <mysecondprocesstasks___approveuserageview name="New Task View" alias="DC7A2A18-760F-8C98-648C-93A129E077C0.task.app.details.view.portlet">
+                            <layout name="titlebar" value="false"/>
+                            <layout name="border" value="false"/>            			
+        </mysecondprocesstasks___approveuserageview> 
+    </CONTEXT>
+</CONFIG>

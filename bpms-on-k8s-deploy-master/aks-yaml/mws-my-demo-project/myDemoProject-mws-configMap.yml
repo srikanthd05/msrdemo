@@ -1,0 +1,60 @@
+---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: mws-demo-my-project-configmap
+      namespace: bpms-load-test
+      labels:
+        app: mws-demo-my-project
+    data:
+      administrator.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <CONTEXT alias="system.directory.user.storage">
+            <wm_xt_sysdiruser name="administrator" password="IloveBPM@2023" disabled="false" passwordValidUntil="-1" />
+          </CONTEXT>
+        </CONFIG>
+      sysadmin.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <CONTEXT alias="system.directory.user.storage">
+            <wm_xt_sysdiruser name="SysAdmin" password="IloveBPM@2023" disabled="false" passwordValidUntil="-1" />
+          </CONTEXT>
+        </CONFIG>  
+      server-settings.xml: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CONFIG>
+            <CONTEXT alias="folder.portlets/My webMethods - Application Configuration">
+                <wm_bam_ws_config name="Web Service Configuration" serverList="true|BPM only|bpm-demo-cluster-ip-svc|5555|false|||false|" />
+            </CONTEXT>
+        </CONFIG>
+      global-cfg.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <runtime_config appName="__global__">
+            <enventries>
+              <entry ftype="java.lang.String" fvalue="custom_val" key="custom_key" />
+              <entry ftype="java.lang.String" fvalue="Administrator" key="wsclient.global.basicauth-username" />
+              <entry ftype="java.lang.String" fvalue="{AES}Xi7dj6KZ16vdaz3zKKnzhQ==" key="wsclient.global.basicauth-password" />
+            </enventries>
+          </runtime_config>
+        </CONFIG>
+      te-settings.xml: |
+        <CONFIG>
+            <CONTEXT alias="webm.apps.config.ws.taskengine">
+                        <page>
+                                    <layout name="editable" value="false" />
+                                    <row>
+                                                <column>
+                                                            <wm_task_search___taskengineconfig name="Task Engine Settings"
+                                                                        processEngineHost="bpm-demo-cluster-ip-svc" processEnginePassword="{AES}Xi7dj6KZ16vdaz3zKKnzhQ==" processEnginePort="5555"
+                                                                        processEngineUsername="Administrator" processEngineUseSSL="false" rulesEngineHost="rules-demo-cluster-ip-svc"
+                                                                        rulesEnginePassword="{AES}Xi7dj6KZ16vdaz3zKKnzhQ==" rulesEnginePort="5555" rulesEngineUsername="Administrator"
+                                                                        rulesEngineUseSSL="false" useProcessEngineConfig="false" />
+                                                </column>
+                                    </row>
+                                    <hobos />
+                        </page>
+            </CONTEXT>
+        </CONFIG>
+        

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim # Create PVC
+metadata:
+  name: postgres-volume-claim # Sets PVC's name
+  namespace: bpms-load-test
+  annotations:
+    volume.beta.kubernetes.io/storage-class: azurefile
+  labels:
+    app: postgres # Defines app to create PVC for
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi # Sets PVC's size

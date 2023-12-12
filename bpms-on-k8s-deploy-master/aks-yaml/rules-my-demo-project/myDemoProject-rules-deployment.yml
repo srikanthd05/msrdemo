@@ -1,0 +1,81 @@
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: rules-demo-my-project
+      name: rules-demo-my-project
+      namespace: bpms-load-test
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: rules-demo-my-project
+      template:
+        metadata:
+          labels:
+            app: rules-demo-my-project
+        spec:
+          #nodeName: aks-agentpool-14287980-vmss00003s
+          containers:
+          - image: registry-144fd7c1.nip.io/v2/wm1015rules-mydemo-myproject:v1
+            livenessProbe:
+              failureThreshold: 600000
+              httpGet:
+                path: /invoke/wm.server/ping
+                port: 5555
+                scheme: HTTP
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              successThreshold: 1
+              timeoutSeconds: 5
+            name: rules-demo-my-project
+            ports:
+            - containerPort: 5555
+            - containerPort: 9999
+              protocol: TCP
+            volumeMounts:
+            - name: rules-license-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmBusinessRules/config/licenseKey.xml
+              subPath: licenseKey.xml 
+            - name: is-license-xml
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
+              subPath: licenseKey.xml   
+            - name: custom-wrapper-conf
+              mountPath: /opt/softwareag/profiles/IS_default/configuration/custom_wrapper.conf
+              subPath: custom_wrapper.conf 
+            readinessProbe:
+              failureThreshold: 60
+              httpGet:
+                path: /invoke/wm.server/ping
+                port: 5555
+                scheme: HTTP
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              successThreshold: 1
+              timeoutSeconds: 5
+          securityContext:
+            runAsUser: 1724
+            runAsGroup: 1724
+            fsGroup: 1724          
+          volumes:
+          - name: is-license-xml
+            configMap:
+              name: is-rules-demo-my-project-license-configmap
+              items:
+              - key: licenseKey.xml 
+                path: licenseKey.xml        
+          - name: rules-license-xml
+            configMap:
+              name: business-rules-license-configmap
+              items:
+              - key: licenseKey.xml 
+                path: licenseKey.xml          
+          - name: custom-wrapper-conf
+            configMap:
+              name: rules-demo-my-project-config-map
+              items:
+              - key: custom_wrapper.conf
+                path: custom_wrapper.conf
+          imagePullSecrets:
+          - name: container-image-registry-creds      

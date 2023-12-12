@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="local" javaclass="com.wm.util.Values">
+    <value name="alias">local</value>
+    <value name="host">daeipresal63329.eur.ad.sag</value>
+    <number name="port" type="Integer">5555</number>
+    <value name="user">Administrator</value>
+    <value name="handle">wm.is.admin.remote.server.local</value>
+    <value name="ssl">no</value>
+    <value name="acl">Administrators</value>
+    <number name="keepalive" type="Integer">1</number>
+    <float name="timeout" type="Float">5.0</float>
+    <value name="webMethods-wM-AdminUI">true</value>
+  </record>
+  <record name="localhost_is" javaclass="com.wm.util.Values">
+    <value name="alias">localhost_is</value>
+    <value name="host">localhost</value>
+    <number name="port" type="Integer">5555</number>
+    <value name="user">Administrator</value>
+    <value name="handle">wm.is.admin.remote.server.localhost_is</value>
+    <value name="ssl">no</value>
+    <value name="acl">Internal</value>
+    <value name="retryServer">5</value>
+    <number name="keepalive" type="Integer">5</number>
+    <float name="timeout" type="Float">1.0</float>
+    <value name="webMethods-wM-AdminUI">true</value>
+  </record>
+  <record name="businessrulesruntime" javaclass="com.wm.util.Values">
+    <value name="alias">businessrulesruntime</value>
+    <value name="host">rules-demo-cluster-ip-svc</value>
+    <number name="port" type="Integer">5555</number>
+    <value name="user">Administrator</value>
+    <value name="handle">wm.is.admin.remote.server.businessrulesruntime</value>
+    <value name="ssl">no</value>
+    <value name="acl">Internal</value>
+    <value name="retryServer"></value>
+    <number name="keepalive" type="Integer">5</number>
+    <float name="timeout" type="Float">1.0</float>
+  </record>
+</Values>

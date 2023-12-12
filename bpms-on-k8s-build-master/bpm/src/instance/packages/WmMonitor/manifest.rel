@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">WmMonitor</value>
+  <value name="version">10.15.0.0.83</value>
+  <value name="build">83</value>
+  <value name="patch_nums"></value>
+  <value name="description"></value>
+  <value name="target_pkg_version">10.15.0.0.83</value>
+  <value name="jvm_version">11.0.18</value>
+  <value name="source_server_version">10.15.0.0</value>
+  <value name="target_server_version">10.15.0.0</value>
+  <value name="time">2023-08-11 04:26:10 UTC</value>
+  <value name="type">full</value>
+  <null name="retainPatchHistory"/>
+  <value name="target_pkg_name">WmMonitor</value>
+  <value name="publisher">bpm-demo-my-project-55999c577b-fjcpx</value>
+  <array name="files_to_delete" type="value" depth="1">
+  </array>
+</Values>

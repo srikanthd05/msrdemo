@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="users" id="1" javaclass="com.wm.util.Values">
+    <record name="Administrator" id="2" javaclass="com.wm.app.b2b.server.User">
+      <value name="name" id="3">Administrator</value>
+      <value name="pass" id="4">(secret)</value>
+      <value name="passHash" id="5">{sha-256_v2}18c21IH3UypsK87DBVU7sKr6NKf9/xVkoZxtWLoIQIz5bPMjtW/tjjAxMDAw</value>
+      <record name="members" id="6" javaclass="com.wm.util.Values">
+        <value name="Replicators" id="7">Replicators</value>
+        <value name="Administrators" id="8">Administrators</value>
+        <value name="Everybody" id="9">Everybody</value>
+      </record>
+      <value name="enabled" id="10">true</value>
+      <value name="changeOnLogin" id="11">No</value>
+      <value name="allowDigestAuth" id="12">false</value>
+      <value name="passwordUpdatedOn" id="13">2023-03-21 04:31:09 CET</value>
+      <array name="passwordHistory" type="record" depth="1" id="14">
+      </array>
+    </record>
+    <record name="Replicator" id="15" javaclass="com.wm.app.b2b.server.User">
+      <value name="name" id="16">Replicator</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="17" javaclass="com.wm.util.Values">
+        <object idref="7" name="Replicators"/>
+        <object idref="9" name="Everybody"/>
+      </record>
+      <object idref="12" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+      <object idref="12" name="allowDigestAuth"/>
+      <value name="passwordUpdatedOn" id="18">2023-03-03 07:26:05 CET</value>
+      <array name="passwordHistory" type="record" depth="1" id="19">
+      </array>
+    </record>
+    <record name="Developer" id="20" javaclass="com.wm.app.b2b.server.User">
+      <value name="name" id="21">Developer</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="22" javaclass="com.wm.util.Values">
+        <value name="Developers" id="23">Developers</value>
+        <object idref="9" name="Everybody"/>
+      </record>
+      <object idref="12" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+      <object idref="12" name="allowDigestAuth"/>
+      <object idref="18" name="passwordUpdatedOn"/>
+      <array name="passwordHistory" type="record" depth="1" id="24">
+      </array>
+    </record>
+    <record name="Central" id="25" javaclass="com.wm.app.b2b.server.User">
+      <value name="name" id="26">Central</value>
+      <object idref="4" name="pass"/>
+      <value name="passHash" id="27">{sha-256_v2}xFLYKp8nNPmxKmTWjYapm3kSl2aKmWC7fcsvYS1199Wwv5H5qU17aDAxMDAw</value>
+      <record name="members" id="28" javaclass="com.wm.util.Values">
+        <value name="CentralAdministrators" id="29">CentralAdministrators</value>
+        <object idref="9" name="Everybody"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+      <object idref="12" name="allowDigestAuth"/>
+      <value name="passwordUpdatedOn" id="30">2023-03-03 07:26:18 CET</value>
+      <array name="passwordHistory" type="record" depth="1" id="31">
+      </array>
+    </record>
+    <record name="Default" id="32" javaclass="com.wm.app.b2b.server.User">
+      <value name="name" id="33">Default</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="34" javaclass="com.wm.util.Values">
+        <value name="Anonymous" id="35">Anonymous</value>
+        <object idref="9" name="Everybody"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+      <object idref="12" name="allowDigestAuth"/>
+      <object idref="18" name="passwordUpdatedOn"/>
+      <array name="passwordHistory" type="record" depth="1" id="36">
+      </array>
+    </record>
+  </record>
+  <record name="groups" id="37" javaclass="com.wm.util.Values">
+    <record name="Replicators" id="38" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="7" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="39" javaclass="com.wm.util.Values">
+        <object idref="3" name="Administrator"/>
+        <object idref="16" name="Replicator"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="Developers" id="40" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="23" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="41" javaclass="com.wm.util.Values">
+        <object idref="21" name="Developer"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="MonitorAdministrators" id="42" javaclass="com.wm.app.b2b.server.Group">
+      <value name="name" id="43">MonitorAdministrators</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="44" javaclass="com.wm.util.Values">
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="CentralAdministrators" id="45" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="29" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="46" javaclass="com.wm.util.Values">
+        <object idref="26" name="Central"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="ReadOnlyAdministrators" id="47" javaclass="com.wm.app.b2b.server.Group">
+      <value name="name" id="48">ReadOnlyAdministrators</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="49" javaclass="com.wm.util.Values">
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="CentralUsers" id="50" javaclass="com.wm.app.b2b.server.Group">
+      <value name="name" id="51">CentralUsers</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="52" javaclass="com.wm.util.Values">
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="Administrators" id="53" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="8" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="54" javaclass="com.wm.util.Values">
+        <object idref="3" name="Administrator"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="Anonymous" id="55" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="35" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="56" javaclass="com.wm.util.Values">
+        <object idref="33" name="Default"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="Everybody" id="57" javaclass="com.wm.app.b2b.server.Group">
+      <object idref="9" name="name"/>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="58" javaclass="com.wm.util.Values">
+        <object idref="3" name="Administrator"/>
+        <object idref="16" name="Replicator"/>
+        <object idref="21" name="Developer"/>
+        <object idref="26" name="Central"/>
+        <object idref="33" name="Default"/>
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="MonitorUsers" id="59" javaclass="com.wm.app.b2b.server.Group">
+      <value name="name" id="60">MonitorUsers</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="61" javaclass="com.wm.util.Values">
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+    <record name="SimulationUsers" id="62" javaclass="com.wm.app.b2b.server.Group">
+      <value name="name" id="63">SimulationUsers</value>
+      <object idref="4" name="pass"/>
+      <null name="passHash"/>
+      <record name="members" id="64" javaclass="com.wm.util.Values">
+      </record>
+      <object idref="10" name="enabled"/>
+      <object idref="11" name="changeOnLogin"/>
+    </record>
+  </record>
+  <object idref="57" name="allusers"/>
+  <object idref="2" name="adminUser"/>
+  <object idref="32" name="defUser"/>
+</Values>

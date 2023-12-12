@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: bpm-demo-um-log-0-pvc
+  namespace: bpms-load-test
+  annotations:
+    #volume.beta.kubernetes.io/storage-class: azurefile-premium
+    volume.beta.kubernetes.io/storage-class: azurefile
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

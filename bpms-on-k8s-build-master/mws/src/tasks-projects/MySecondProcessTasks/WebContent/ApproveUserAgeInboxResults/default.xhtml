@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:caf_f="http://webmethods.com/jsf/caf/core"
+	xmlns:caf_h="http://webmethods.com/jsf/caf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:cafp_h="http://webmethods.com/jsf/cafp/html"
+	xmlns:mws_f="http://webmethods.com/jsf/mws/core"
+	xmlns:mws_h="http://webmethods.com/jsf/mws/html">
+<ui:composition>
+	<caf_f:view
+		pageManagedBean="ApproveUserAgeInboxResultsDefaultxhtmlView"
+		preferencesBean="ApproveUserAgeInboxResults">
+		<caf_f:design-time-attribute name="taskTypeID"
+			value="DC7A2A18-760F-8C98-648C-93A129E077C0"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="taskPortletType"
+			value="taskInboxResult"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="portlet"
+			value="ApproveUserAgeInboxResults"></caf_f:design-time-attribute>
+		<caf_f:design-time-attribute name="convertedFile" value="true"></caf_f:design-time-attribute>
+		<caf_h:form defaultFocus="_first" id="searchResultsForm">
+			<caf_h:formattedMessages globalOnly="true">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+			</caf_h:formattedMessages>
+			<caf_h:scriptCustom
+				code="CAF.model('#{activePageBean.clientIds[&quot;searchResultsTableControl&quot;]}').addRowChangeListener(&#10;  function(id, rowId, type) {&#10;    var disabled = true;&#10;    if (  CAF.model ( id ).getRowSelectedCount () &gt; 0 ) &#10;    {&#10;      disabled = false;&#10;    }&#10;    CAF.model('#{activePageBean.clientIds[&quot;toggleDelegateDialog&quot;]}').setDisabled ( disabled );&#10;    CAF.model('#{activePageBean.clientIds[&quot;toggleUndelegateDialog&quot;]}').setDisabled ( disabled );&#10;  }&#10;);&#10;"
+				id="buttonDisableScript" event="none">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+			</caf_h:scriptCustom>
+			<caf_h:panelBlockEdge>
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<f:facet name="leftEdge">
+					<h:panelGroup>
+						<caf_h:asyncCommandButton
+							action="#{activePageBean.taskSearchProvider.refresh}"
+							id="button1"
+							value='#{activePreferencesBean.portletResources["button.action.refresh"]}'
+							rendered="#{not activePageBean.searchBarAvailable}"></caf_h:asyncCommandButton>
+						<caf_h:oneWayToggleButton for="delegatePrincipalPicker"
+							disabled="true" id="toggleDelegateDialog"
+							value='#{activePreferencesBean.portletResourcesProvider["button.action.delegate"]}'
+							way="show"></caf_h:oneWayToggleButton>
+						<caf_h:oneWayToggleButton for="dialogUndelegate" disabled="true"
+							id="toggleUndelegateDialog"
+							value='#{activePreferencesBean.portletResourcesProvider["button.action.undelegate"]}'
+							way="show"></caf_h:oneWayToggleButton>
+					</h:panelGroup>
+				</f:facet>
+				<f:facet name="rightEdge">
+					<h:panelGroup>
+						<cafp_h:portletSimpleLink
+							value='#{activePreferencesBean.portletResourcesProvider["button.action.manage.subscribe"]}'>
+							<f:facet name="href">
+								<mws_f:extendedPortletUrl
+									baseUrl="webm.apps.workflow.inbox.subscription">
+									<mws_f:extendedPortletUrl
+										portlet="webm.apps.workflow.inbox.subscription.portlet">
+										<mws_f:extendedPortletParameter name="source" value="inbox"></mws_f:extendedPortletParameter>
+									</mws_f:extendedPortletUrl>
+								</mws_f:extendedPortletUrl>
+							</f:facet>
+							<caf_h:outputText
+								value='#{activePreferencesBean.portletResourcesProvider["button.action.manage.subscribe"]}'></caf_h:outputText>
+						</cafp_h:portletSimpleLink>
+						<caf_h:outputText value="&amp;nbsp;&amp;nbsp;" escape="false"></caf_h:outputText>
+						<cafp_h:portletSimpleLink
+							value='#{activePreferencesBean.portletResourcesProvider["button.action.manage.delegate"]}'>
+							<f:facet name="href">
+								<mws_f:extendedPortletUrl
+									baseUrl="webm.apps.workflow.inbox.sched.delegation">
+									<mws_f:extendedPortletUrl
+										portlet="webm.apps.workflow.inbox.sched.delegation.portlet">
+										<mws_f:extendedPortletParameter name="source" value="inbox"></mws_f:extendedPortletParameter>
+									</mws_f:extendedPortletUrl>
+								</mws_f:extendedPortletUrl>
+							</f:facet>
+							<caf_h:outputText
+								value='#{activePreferencesBean.portletResourcesProvider["button.action.manage.delegate"]}'></caf_h:outputText>
+						</cafp_h:portletSimpleLink>
+					</h:panelGroup>
+				</f:facet>
+			</caf_h:panelBlockEdge>
+			<caf_h:dataSearchResultTable id="searchResultsTableControl" var="row"
+				rowClasses="portlet-section-body,portlet-section-alternate"
+				value="#{activePageBean.taskSearchProvider}" maxOrdinal="1"
+				rows="#{activePreferencesBean.initialPageSize}"
+				headerClass="portlet-section-subheader"
+				footerClass="portlet-section-footer" width="100%">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<caf_h:column
+					label='#{activePreferencesBean.portletResourcesProvider["task.select.header"]}'
+					id="selectColumn">
+					<f:facet name="header">
+						<caf_h:dataSelectAllRowsCheckbox></caf_h:dataSelectAllRowsCheckbox>
+					</f:facet>
+					<f:facet name="footer"></f:facet>
+					<caf_h:dataSelectRowCheckbox></caf_h:dataSelectRowCheckbox>
+				</caf_h:column>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.accepted.header"]}'
+					sort="#{row.taskInfo.currentUserAccepted}" width="1%"
+					id="taskAcceptedColumn">
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:graphicImage
+								title='#{activePreferencesBean.portletResourcesProvider["task.accepted.tooltip"]}'
+								alt='#{activePreferencesBean.portletResourcesProvider["task.accepted.tooltip"]}'
+								url="/img/icon_yellow_check.gif" style="border:0"></h:graphicImage>
+						</h:panelGroup>
+					</f:facet>
+					<h:graphicImage
+						title='#{activePreferencesBean.portletResourcesProvider["task.accepted.tooltip"]}'
+						alt='#{activePreferencesBean.portletResourcesProvider["task.accepted.tooltip"]}'
+						url="/img/icon_yellow_check.gif"
+						rendered="#{row.taskInfo.currentUserAccepted}"></h:graphicImage>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.delegated.to.icon.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.delegatedToCurrentUser}"
+					width="1%" id="taskDelegatedToIconColumn">
+					<f:facet name="header">
+						<h:graphicImage
+							title='#{activePreferencesBean.portletResourcesProvider["task.delegated.to.icon.tooltip"]}'
+							alt='#{activePreferencesBean.portletResourcesProvider["task.delegated.to.icon.tooltip"]}'
+							url="/img/icon_delegate.gif" style="border:0">
+							<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+						</h:graphicImage>
+					</f:facet>
+					<h:graphicImage
+						title="#{activePageBean.taskDisplayProvider.delegatedDisplayName}"
+						alt="#{activePageBean.taskDisplayProvider.delegatedDisplayName}"
+						url="/img/icon_delegate.gif"
+						rendered="#{activePageBean.taskDisplayProvider.delegatedToCurrentUser}"
+						style="border:0"></h:graphicImage>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.delegated.from.icon.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.delegatedFromCurrentUser}"
+					width="1%" id="taskDelegatedFromIconColumn">
+					<f:facet name="header">
+						<h:graphicImage
+							title='#{activePreferencesBean.portletResourcesProvider["task.delegated.from.icon.tooltip"]}'
+							alt='#{activePreferencesBean.portletResourcesProvider["task.delegated.from.icon.tooltip"]}'
+							url="/img/icon_delegate_from.gif" style="border:0"></h:graphicImage>
+					</f:facet>
+					<h:graphicImage
+						title="#{activePageBean.taskDisplayProvider.delegatedDisplayName}"
+						alt="#{activePageBean.taskDisplayProvider.delegatedDisplayName}"
+						url="/img/icon_delegate_from.gif"
+						rendered="#{activePageBean.taskDisplayProvider.delegatedFromCurrentUser}"
+						style="border:0"></h:graphicImage>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.id.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.taskIDNumber}"
+					id="taskIdColumn" ordinal="1">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.id.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:commandLink action="#{activePageBean.openTask}"
+						id="openTaskCommandLink">
+						<f:param name="currentTaskID" value="#{row.taskInfo.taskID}"></f:param>
+						<caf_h:outputText value="#{row.taskInfo.taskID}"></caf_h:outputText>
+					</caf_h:commandLink>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.priority.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.priorityDisplayName}"
+					id="taskPriorityColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.priority.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText
+						value="#{activePageBean.taskDisplayProvider.priorityDisplayName}"></caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.createdby.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.createdByDisplayName}"
+					id="taskLastCreatedByColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.createdby.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText
+						value="#{activePageBean.taskDisplayProvider.createdByDisplayName}"></caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.modifiedby.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.lastModifiedDisplayName}"
+					id="taskLastModifiedByColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.modifiedby.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText
+						value="#{activePageBean.taskDisplayProvider.lastModifiedDisplayName}"></caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.created.header"]}'
+					sort="#{row.taskInfo.createdDate}" id="taskCreatedDateColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.created.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText value="#{row.taskInfo.createdDate}">
+						<caf_f:convertFormattedDateTime displayTime="true"
+							timePrecision="0"
+							pattern='#{portletUserAttributes["user.default.date.format"]}'
+							timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+							patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+					</caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.expiration.header"]}'
+					sort="#{row.taskInfo.expireDate}" id="taskExpirationColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.expiration.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText value="#{row.taskInfo.expireDate}">
+						<caf_f:convertFormattedDateTime displayTime="true"
+							timePrecision="0"
+							pattern='#{portletUserAttributes["user.default.date.format"]}'
+							timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+							patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+					</caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.updated.header"]}'
+					sort="#{row.taskInfo.lastModifiedDate}" id="taskUpdatedDateColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.updated.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText value="#{row.taskInfo.lastModifiedDate}">
+						<caf_f:convertFormattedDateTime displayTime="true"
+							timePrecision="0"
+							pattern='#{portletUserAttributes["user.default.date.format"]}'
+							timeZone='#{portletUserAttributes["user.default.time_zone"]}'
+							patternTime='#{portletUserAttributes["user.default.time.format"]}'></caf_f:convertFormattedDateTime>
+					</caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.custom.header"]}'
+					sort="#{row.taskInfo.customTaskID}" id="taskCustomIDColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.custom.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:commandLink action="#{activePageBean.openTask}">
+						<f:param name="currentTaskID" value="#{row.taskInfo.taskID}"></f:param>
+						<caf_h:outputText value="#{row.taskInfo.customTaskID}"></caf_h:outputText>
+					</caf_h:commandLink>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.type.header"]}'
+					sort="#{activePageBean.taskDisplayProvider.taskTypeDisplayName}"
+					id="taskTypeColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.type.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:outputText
+						value="#{activePageBean.taskDisplayProvider.taskTypeDisplayName}"></caf_h:outputText>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.assignedto.header"]}'
+					sort="#{row.taskInfo.assignedToList}" id="taskAssignedColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.assignedto.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:dataSimpleList var="assigned" rows="10"
+						value="#{activePageBean.taskDisplayProvider.assignedPrincipalsListProvider}">
+						<caf_h:outputText value="#{assigned}"></caf_h:outputText>
+					</caf_h:dataSimpleList>
+				</caf_h:columnStandard>
+				<caf_h:columnStandard
+					label='#{activePreferencesBean.portletResourcesProvider["task.acceptedby.header"]}'
+					sort="#{row.taskInfo.acceptedByList}" id="taskAcceptedByColumn">
+					<f:facet name="header">
+						<caf_h:outputText
+							value='#{activePreferencesBean.portletResourcesProvider["task.acceptedby.header"]}'></caf_h:outputText>
+					</f:facet>
+					<caf_h:dataSimpleList var="accepted" rows="10"
+						value="#{activePageBean.taskDisplayProvider.acceptedPrincipalsListProvider}">
+						<caf_h:outputText value="#{accepted}"></caf_h:outputText>
+					</caf_h:dataSimpleList>
+				</caf_h:columnStandard>
+			</caf_h:dataSearchResultTable>
+			<caf_h:modalDialog refreshOnShow="true" lazy="true"
+				id="dialogUndelegate">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<f:facet name="title">
+					<caf_h:outputText
+						value='#{activePreferencesBean.portletResourcesProvider["dialog.undelegate.header.text"]}'></caf_h:outputText>
+				</f:facet>
+				<f:facet name="submit">
+					<caf_h:asyncCommandButton
+						action="#{activePageBean.commandUndelegate_action}"
+						id="commandUndelegate"
+						value='#{activePreferencesBean.portletResourcesProvider["button.action.undelegate"]}'
+						onclick="CAF.model('#{activePageBean.clientIds[&quot;dialogUndelegate&quot;]}').hide()"></caf_h:asyncCommandButton>
+				</f:facet>
+				<f:facet name="cancel">
+					<caf_h:asyncCommandButton
+						action="#{activePageBean.doDelegateCancel}"
+						id="commandUndelegateCancel"
+						value='#{activePreferencesBean.portletResourcesProvider["button.action.cancel"]}'
+						onclick="CAF.model('#{activePageBean.clientIds[&quot;dialogUndelegate&quot;]}').hide()"></caf_h:asyncCommandButton>
+				</f:facet>
+				<f:facet name="other"></f:facet>
+				<caf_f:logicIf
+					value="#{activePageBean.selectedTaskInfosProvider.rowCount gt 0}">
+					<caf_h:dataSimpleList var="selectedTaskRow" rows="10" layout="ul"
+						value="#{activePageBean.selectedTaskInfosProvider}"
+						selected="true">
+						<caf_h:outputFormat
+							value='#{activePreferencesBean.portletResourcesProvider["task.dialog.task.list.text"]} '>
+							<f:param value="#{selectedTaskRow.taskID}"></f:param>
+						</caf_h:outputFormat>
+						<caf_f:logicIf
+							value="#{not activePageBean.taskDisplayProviderForDialog.delegatedFromCurrentUser}">
+							<caf_h:outputText
+								value=' - #{activePreferencesBean.portletResourcesProvider["task.confirm.not.delegated"]}'></caf_h:outputText>
+						</caf_f:logicIf>
+						<caf_f:logicIf rendered="false"
+							value="#{not activePageBean.taskContentProviderExtended.canUserDelegateTask}">
+							<caf_h:outputText
+								value=' - #{activePreferencesBean.portletResourcesProvider["task.dialog.action.notallowed"]}'></caf_h:outputText>
+						</caf_f:logicIf>
+					</caf_h:dataSimpleList>
+				</caf_f:logicIf>
+				<caf_f:logicElse
+					value="#{activePageBean.selectedTaskInfosProvider.rowCount le 0}">
+					<caf_h:outputText
+						value='#{activePreferencesBean.portletResourcesProvider["task.dialog.nonselected"]}'></caf_h:outputText>
+				</caf_f:logicElse>
+			</caf_h:modalDialog>
+			<mws_h:peoplePickerDialog groupSearchAllowed="false"
+				id="delegatePrincipalPicker"
+				applyButtonActionExpression="#{activePageBean.doDelegateSelectedTasks}"
+				multipleSelectionsAllowed="false" roleSearchAllowed="false"
+				refreshOnShow="true" lazy="true"
+				targetValue="#{activePageBean.delegatePrincipal}">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<caf_f:design-time-attribute name="controlGetterMethod"
+					value="getDelegatePrincipalPicker"></caf_f:design-time-attribute>
+				<f:facet name="popupPanel">
+					<f:subview id="delegateTargetPickerPopup">
+						<caf_h:asyncCommandLink id="showAvailability"
+							value='#{activePreferencesBean.portletResourcesProvider["task.availability"]}'
+							onclick="CAF.Popup.hideAll();" refresh="personCalendarDialog"
+							toggle="personCalendarDialog">
+							<f:param name="personURI" value="#{row.principalURI}"></f:param>
+						</caf_h:asyncCommandLink>
+					</f:subview>
+				</f:facet>
+			</mws_h:peoplePickerDialog>
+			<caf_h:panelBlock rendered="false" id="panelDelegateConfirm">
+				<caf_f:design-time-attribute name="rolledUp" value="true"></caf_f:design-time-attribute>
+				<caf_f:design-time-attribute name="controlGetterMethod"
+					value="getPanelDelegateConfirm"></caf_f:design-time-attribute>
+				<caf_h:outputText
+					value='#{activePreferencesBean.portletResourcesProvider["task.delegate.confirm.header"]}'></caf_h:outputText>
+				<caf_f:logicIf
+					value="#{activePageBean.selectedTaskInfosProvider.rowCount gt 0}">
+					<caf_h:dataSimpleList var="selectedTaskRow" rows="100" layout="ul"
+						value="#{activePageBean.selectedTaskInfosProvider}"
+						selected="true">
+						<caf_h:outputFormat
+							value='#{activePreferencesBean.portletResourcesProvider["task.dialog.task.list.text"]} '>
+							<f:param value="#{selectedTaskRow.taskID}"></f:param>
+						</caf_h:outputFormat>
+						<caf_f:logicIf
+							value="#{not activePageBean.taskContentProviderExtendedForList.canUserDelegateTask}">
+							<caf_h:outputText
+								value=' - #{activePreferencesBean.portletResourcesProvider["task.dialog.action.notallowed"]}'></caf_h:outputText>
+						</caf_f:logicIf>
+						<caf_f:logicIf
+							value="#{activePageBean.taskDisplayProviderForDialog.delegatedFromCurrentUser}">
+							<caf_h:outputText
+								value=' - #{activePreferencesBean.portletResourcesProvider["task.confirm.already.delegated"]}'></caf_h:outputText>
+						</caf_f:logicIf>
+					</caf_h:dataSimpleList>
+				</caf_f:logicIf>
+				<caf_f:logicElse
+					value="#{activePageBean.selectedTaskInfosProvider.rowCount le 0}">
+					<caf_h:outputText
+						value='#{activePreferencesBean.portletResourcesProvider["task.dialog.nonselected"]}'></caf_h:outputText>
+				</caf_f:logicElse>
+			</caf_h:panelBlock>
+			<mws_h:personCalendarDialog id="personCalendarDialog"
+				personURI="#{param.personURI}"></mws_h:personCalendarDialog>
+		</caf_h:form>
+	</caf_f:view>
+</ui:composition>
+</html>

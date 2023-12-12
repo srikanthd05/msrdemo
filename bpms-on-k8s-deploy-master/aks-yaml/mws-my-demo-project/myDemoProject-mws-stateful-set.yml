@@ -1,0 +1,161 @@
+---
+    apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      labels:
+        app: mws-demo-my-project
+      name: mws-demo-my-project
+      namespace: bpms-load-test
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: mws-demo-my-project
+      serviceName: "mws-demo-my-project-svc"
+      template:
+        metadata:
+          labels:
+            app: mws-demo-my-project
+        spec:
+          #nodeName: aks-agentpool-14287980-vmss00004f
+          containers:
+          - image: registry-144fd7c1.nip.io/v2/wm1015mws-mydemo-myproject:v1
+            imagePullPolicy: Always
+            name: mws-demo-my-project 
+            ports:
+            - containerPort: 8585
+              protocol: TCP 
+            env:
+            - name: DB_URL
+              value: "jdbc:wm:postgresql://bpmspoc31032023db1.postgres.database.azure.com:5432;databaseName=wm_mws_aks"
+            - name: DB_USERNAME
+              value: "letsdobpmspoc"
+            - name: DB_PASSWORD
+              value: "WeAreDoingBPMS@2023"  
+            - name: DB_TYPE
+              value: "postgresql"    
+            - name: NODE_NAME
+              valueFrom:
+               fieldRef:
+                  fieldPath: metadata.name
+            volumeMounts:
+            - name: mws-bpm-demo-vol-data
+              mountPath: /opt/sag/mws/MWS/volumes/data   
+              readOnly: false  
+            - name: mws-bpm-demo-vol-logs
+              mountPath: /opt/sag/mws/MWS/volumes/logs   
+              readOnly: false  
+            - name: administrator-creds
+              mountPath: /opt/sag/mws/MWS/volumes/configs/assets_cfg/administrator.xml
+              subPath: administrator.xml
+            - name: sysadmin-creds
+              mountPath: /opt/sag/mws/MWS/volumes/configs/assets_cfg/sysadmin.xml
+              subPath: sysadmin.xml  
+            - name: te-settings
+              mountPath: /opt/sag/mws/MWS/volumes/configs/assets_cfg/te-settings.xml
+              subPath: te-settings.xml 
+            - name: server-settings
+              mountPath: /opt/sag/mws/MWS/volumes/configs/assets_cfg/server-settings.xml
+              subPath: server-settings.xml
+            - name: global-cfg
+              mountPath: /opt/sag/mws/MWS/volumes/configs/assets_cfg/global-cfg.xml
+              subPath: global-cfg.xml 
+            - name: custom-wrapper-conf
+              mountPath: /opt/sag/mws/MWS/volumes/configs/profile_cfg/custom_wrapper.conf
+              subPath: custom_wrapper.conf 
+            readinessProbe:
+              tcpSocket:
+                port: 8585
+              initialDelaySeconds: 180
+              timeoutSeconds: 5
+              periodSeconds: 5
+              successThreshold: 1
+              failureThreshold: 20000
+            livenessProbe:
+              tcpSocket:
+                port: 8585
+              initialDelaySeconds: 180
+              timeoutSeconds: 5
+              periodSeconds: 60
+              successThreshold: 1
+              failureThreshold: 20000               
+            #readinessProbe:
+            #  httpGet:
+            #    path: /health
+            #    port: 8585
+            #    scheme: HTTP
+            #  initialDelaySeconds: 60
+            #  timeoutSeconds: 5
+            #  periodSeconds: 5
+            #  successThreshold: 1
+            #  failureThreshold: 200000
+            #livenessProbe:
+            #  httpGet:
+            #    path: /health
+            #   port: 8585
+            #    scheme: HTTP
+            #  initialDelaySeconds: 60
+            #  timeoutSeconds: 5
+            #  periodSeconds: 60
+            #  successThreshold: 1
+            #  failureThreshold: 200000
+          imagePullSecrets:
+          - name: container-image-registry-creds
+          terminationGracePeriodSeconds: 30   
+          volumes:
+          - name: administrator-creds
+            configMap:
+              name: mws-demo-my-project-configmap
+              items:
+                - key: administrator.xml
+                  path: administrator.xml 
+          - name: sysadmin-creds
+            configMap:
+              name: mws-demo-my-project-configmap
+              items:
+                - key: sysadmin.xml
+                  path: sysadmin.xml         
+          - name: te-settings
+            configMap:
+              name: mws-demo-my-project-configmap
+              items:
+                - key: te-settings.xml
+                  path: te-settings.xml             
+          - name: server-settings
+            configMap:
+              name: mws-demo-my-project-configmap
+              items:
+                - key: server-settings.xml
+                  path: server-settings.xml
+          - name: global-cfg
+            configMap:
+              name: mws-demo-my-project-configmap
+              items:
+                - key: global-cfg.xml
+                  path: global-cfg.xml   
+          - name: custom-wrapper-conf
+            configMap:
+              name: mws-my-demo-project-custom-wrapper-conf-configmap
+              items:
+                - key: custom_wrapper.conf
+                  path: custom_wrapper.conf      
+      volumeClaimTemplates:                          
+      - metadata:
+          name: mws-bpm-demo-vol-data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: "azurefile"
+          resources:
+            requests:
+              storage: 1Gi
+      - metadata:
+          name: mws-bpm-demo-vol-logs
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: "azurefile"
+          resources:
+            requests:
+              storage: 2Gi                                                                   
+      updateStrategy:
+        type: RollingUpdate
+               
